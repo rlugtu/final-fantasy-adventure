@@ -5,13 +5,13 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;;
+    align-items: center;
 }
 
 .game-window {
     width: 1500px;
     height: 1000px;
-    border: 8px solid black;
+    border: 10px solid black;
 }
 
 /*  MAP CONTENT */
@@ -52,11 +52,22 @@ body {
 
 .enemy-icon {
     margin-top: 200px;
-    margin-left: 200px;
+    margin-left: 150px;
     width: 200px;
     height: 250px;
     border: 5px solid black;
     background-color: rgba(139, 127, 109, 0.8);
+}
+
+.attack-animation {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    margin-left: 800px;
+    margin-top: 200px;
+    background-image: url("../images/attack-animation.gif");
+    background-size: 80%;
+    background-repeat: no-repeat;
 }
 
 .player-icon {
@@ -182,5 +193,9 @@ body {
 
 /* TOGGLE FOR ACTIVE WINDOW */
 .inactive {
+    display: none;
+}
+
+.attack-on {
     display: none;
 }
