@@ -263,6 +263,9 @@ margin-top: 50px;
 .steal{
     animation: steal 3s;
 }
+.run {
+    animation: run 2s;
+}
 @keyframes enlarge {
     0%{
         transform: scale(0) rotate(0);
@@ -284,4 +287,18 @@ margin-top: 50px;
     100%{
         transform: scale(1) translateY(0) translateX(0) rotate(0);
     }
+}
+
+@keyframes run {
+    0%{
+        transform: scale(1) translateY(0) translateX(0) rotate(0);
+    }
+    50% {
+        transform: scaleX(-1) translateY(0) translateX(0) rotate(0);
+        opacity: 1;
+    }
+    100%{
+        transform: scaleX(-1) translateY(0) translateX(100px) rotate(0);
+        opacity: 0;
+
 }

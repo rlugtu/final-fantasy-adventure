@@ -72,3 +72,15 @@ stealOption.addEventListener('click', () => {
     }, 4000)
     
 })
+
+// run button
+const runOption = document.querySelector('#run')
+runOption.addEventListener('click', () => {
+    let playerIcon = document.querySelector('.player-icon')
+    setTimeout(function() {
+        playerIcon.classList.add('run')
+    },500)
+    setTimeout(function() {
+        playerIcon.classList.remove('run')
+    },4000)
+})
