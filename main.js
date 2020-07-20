@@ -1,5 +1,5 @@
 
-
+// Screen divs 
 const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
@@ -28,3 +28,19 @@ shopToggle.addEventListener('click', () => {
     battleScreen.classList.add('inactive')
     shopScreen.classList.remove('inactive')
 })
+
+// Battle Options Event Listeners
+const attackOption = document.querySelector('#attack')
+const attackAnimation = document.querySelector('.attack-animation')
+
+
+attackOption.addEventListener('click', () => {
+    setTimeout(function() {
+        attackAnimation.classList.remove('attack-off')
+    }, 1000)
+    
+    setTimeout(function(){
+        attackAnimation.classList.add('attack-off')
+    }, 3000) 
+})
+
