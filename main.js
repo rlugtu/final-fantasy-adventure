@@ -27,7 +27,7 @@ shopToggle.addEventListener('click', () => {
 })
 
 // Battle Options Event Listeners
-
+// have to move these inside a function when its the players turn 
 // attack button
 const attackOption = document.querySelector('#attack')
 // attack animation class
@@ -58,4 +58,17 @@ backButton.addEventListener('click', () => {
     let inventory = document.querySelector('.inventory')
     allOptions.classList.remove('off')
     inventory.classList.add('off')
+})
+
+// steal button
+const stealOption = document.querySelector('#steal')
+stealOption.addEventListener('click', () => {
+    let playerIcon = document.querySelector('.player-icon')
+    setTimeout(function() {
+        playerIcon.classList.add('steal')
+    }, 1000)
+    setTimeout(function() {
+        playerIcon.classList.remove('steal')
+    }, 4000)
+    
 })
