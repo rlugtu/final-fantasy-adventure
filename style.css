@@ -60,13 +60,13 @@ body {
 }
 
 .player-icon {
-    margin-top: 650px;
-    margin-left: 150px;
+    margin-top: 550px;
+    margin-left: 75px;
     position: absolute;
-    width: 200px;
-    height: 250px;
-    border: 5px solid black;
-    background-color: rgba(139, 127, 109, 0.8)
+    width: 500px;
+    height: 500px;
+    background-image: url(../images/cloud.png);
+    background-repeat: no-repeat;
 }
 
 .player-options {
@@ -94,6 +94,10 @@ body {
     border: 5px solid black;
     font-size: 30px;
 }
+#attack:hover {
+    background-color: lightslategray;
+    cursor: pointer;
+}
 #steal {
     display: flex;
     justify-content: center;
@@ -104,6 +108,10 @@ body {
     height: 50px;
     border: 5px solid black;
     font-size: 30px;
+}
+#steal:hover {
+    background-color: lightslategray;
+    cursor: pointer;
 }
 #item {
     display: flex;
@@ -116,7 +124,10 @@ body {
     border: 5px solid black;
     font-size: 30px;
 }
-
+#item:hover {
+    background-color: lightslategray;
+    cursor: pointer;
+}
 #run {
     display: flex;
     justify-content: center;
@@ -127,6 +138,10 @@ body {
     height: 50px;
     border: 5px solid black;
     font-size: 30px;
+}
+#run:hover {
+    background-color: lightslategray;
+    cursor: pointer;
 }
 
 
