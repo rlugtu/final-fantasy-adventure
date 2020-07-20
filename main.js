@@ -47,12 +47,15 @@ attackOption.addEventListener('click', () => {
 const itemOption = document.querySelector('#item')
 let allOptions = document.querySelector('.player-options')
 itemOption.addEventListener('click', () => {
+    let inventory = document.querySelector('.inventory')
     allOptions.classList.add('off')
     inventory.classList.remove('off')
 })
-let inventory = document.querySelector('.inventory')
+// open inventory after item button is clicked
 const backButton = document.querySelector('#backButton')
+
 backButton.addEventListener('click', () => {
+    let inventory = document.querySelector('.inventory')
     allOptions.classList.remove('off')
     inventory.classList.add('off')
 })
