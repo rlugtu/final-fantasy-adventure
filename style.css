@@ -191,6 +191,24 @@ body {
     border: 5px solid black;
 }
 
+.toggle {
+margin-top: 50px;
+}
+#map-toggle {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+#battle-toggle {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+#shop-toggle {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
 /* TOGGLE FOR ACTIVE WINDOW */
 .inactive {
     display: none;
