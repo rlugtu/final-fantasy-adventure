@@ -24,6 +24,28 @@ body {
     background-size: 100%;
 }
 
+.player-icon-map {
+    position: absolute;
+    margin-top: 515px;
+    margin-left: 150px;
+    width: 100px;
+    height: 80px;
+    background-image:url("./images/player-icon.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
+.monster1 {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    margin-top: 200px;
+    margin-left: 100px;
+    background-image:url("./images/monster-1.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+
 
 
 

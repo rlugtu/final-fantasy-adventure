@@ -5,7 +5,7 @@ const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 
 
-// MAP TOGGLES 
+// SCREEN TOGGLES 
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
@@ -25,6 +25,34 @@ shopToggle.addEventListener('click', () => {
     battleScreen.classList.add('inactive')
     shopScreen.classList.remove('inactive')
 })
+
+// MAP EVENT LISTENERS
+
+// MOVING CHARACTER
+window.addEventListener("keydown", (e) => {
+    let playerIconMap = document.querySelector('.player-icon-map')
+    // key up
+    if(e.keyCode == "38" ) {
+        console.log('up')
+        playerIconMap.style.marginTop = playerIconMap.style.marginTop - 20 + 'px';
+    }
+    //key down
+    else if(e.keyCode =="40") {
+        console.log('down')
+        playerIconMap.style.marginTop = playerIconMap.style.marginTop + 20 + 'px';
+    }
+    // key left
+    else if(e.keyCode =="37") {
+        console.log('left')
+    }
+
+    // key right
+    else if(e.keyCode == "39") {
+        console.log('right')
+    }
+});
+
+
 
 // Battle Options Event Listeners
 // have to move these inside a function when its the players turn 
@@ -123,3 +151,22 @@ shopBackButton.addEventListener('click', () => {
     battleScreen.classList.add('inactive')
     shopScreen.classList.add('inactive')
 })
+
+
+
+
+// ENEMY STATS
+
+class Enemy {
+    constructor(name, health, attack) {
+        this.name = name;
+        this.health = health;
+        this.attack = attack;
+    }
+    attackFunc() {
+        // return a random number from the range of damages the monster can make
+        return (this.attack[Math.floor(Math.random()*this.attack.length)])
+    }
+} 
+
+const monster1 = new Enemy('test', 100, [1,2,3,4,5]) 
