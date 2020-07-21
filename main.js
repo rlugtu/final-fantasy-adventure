@@ -119,7 +119,7 @@ const attack = (enemy) => {
         if(winCondition(enemy) === false ) {
             // ENEMY TURN
             //enemy move animation
-            let enemyIcon = document.querySelector('#enemyID')
+            let enemyIcon = document.querySelector('.enemy-icon')
             setTimeout(function() {
                 enemyIcon.classList.add('enemyAttack')
             },4500)
@@ -244,7 +244,7 @@ shopBackButton.addEventListener('click', () => {
 
 
 
-// ENEMY STATS
+// ENEMIES
 
 class Enemy {
     constructor(name, health, attack,money) {
@@ -259,12 +259,15 @@ class Enemy {
     }
 } 
 
-const sixHeadDragon = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
-
+const sixHeadDragon = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50])
+sixHeadDragon.url = './images/monster-1.png '
+const snakeBlades =new Enemy('Snake Blades', 20, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
+snakeBlades.url = './images/snakeBlades.png'
+// CLOUD
 const cloud = {
     name: 'Cloud',
     attack: [1,2,3,4,5],
-    health: 1,
+    health: 100,
     money: 0,
 
     cloudAttack() {
@@ -306,7 +309,11 @@ const enemyTurn = (enemy) => {
     return damageTaken
 }
 
+
+let enemyIcon = document.querySelector('.enemy-icon')
 const fight = (enemy) => {
+    // change the Enemy Icon based on Monster
+    enemyIcon.style.backgroundImage = `url('${enemy.url}')`
     if(enemy.health > 0) {
         enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
         playerHealth.innerText = `Health: ${cloud.health}`
@@ -314,5 +321,6 @@ const fight = (enemy) => {
     }
 }
 
-
+// let enemyIcon = document.querySelector('#enemy-con')
 fight(sixHeadDragon)
+fight(snakeBlades)
