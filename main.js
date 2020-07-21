@@ -194,7 +194,7 @@ const steal = (enemy) => {
         if(winCondition(enemy) === false ) {
             // ENEMY TURN
             //enemy move animation
-            let enemyIcon = document.querySelector('#enemyID')
+            let enemyIcon = document.querySelector('.enemy-icon')
             setTimeout(function() {
                 enemyIcon.classList.add('enemyAttack')
             },4500)
@@ -205,6 +205,7 @@ const steal = (enemy) => {
             setTimeout(function() {
                 let damageTaken = enemyTurn(enemy)
                 actionsDialogue.innerText = `You took ${damageTaken} damage!`
+                playerHealth.innerText = `Health: ${cloud.health}`
             },5500)
         }
     })
@@ -261,8 +262,13 @@ class Enemy {
 
 const sixHeadDragon = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50])
 sixHeadDragon.url = './images/monster-1.png '
+
 const snakeBlades =new Enemy('Snake Blades', 20, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
 snakeBlades.url = './images/snakeBlades.png'
+
+const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,50], [10,10,10,15,15,25,25,50,100])
+skulls.url = './images/skulls.png'
+
 // CLOUD
 const cloud = {
     name: 'Cloud',
@@ -291,15 +297,6 @@ const playerOptions = (enemy) => {
     steal(enemy)
     run()
 }
-const switchTurn = (player) => {
-    if(player === 1) {
-        currentPlayer = 0
-    }
-    else {
-        currentPlayer = 1
-    }
-}
-let currentPlayer = 1
 
 // enemy attack 
 const enemyTurn = (enemy) => {
@@ -322,5 +319,5 @@ const fight = (enemy) => {
 }
 
 // let enemyIcon = document.querySelector('#enemy-con')
-fight(sixHeadDragon)
-fight(snakeBlades)
+fight(skulls)
+
