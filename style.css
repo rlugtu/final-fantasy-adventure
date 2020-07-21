@@ -60,7 +60,7 @@ body {
     flex-wrap: wrap;
 
 }
-.enemy-window{
+.dialogueBox{
     position: absolute;
     margin-top: 20px;
     margin-left: 20px;
@@ -132,6 +132,12 @@ body {
     border: 3px solid black;
     background-color:  rgba(139, 127, 109, 0.8);
     padding: 20px;
+}
+#battleMoney {
+    position: absolute;
+    margin-top: -60px;
+    margin-left: 10px;
+    font-weight: bold;
 }
 #attack {
     display: flex;
@@ -313,7 +319,7 @@ body {
     animation: enlarge 1s;
 }
 .steal{
-    animation: steal 3s;
+    animation: steal 2.5s;
 }
 .run {
     animation: run 3s;

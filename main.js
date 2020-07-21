@@ -32,8 +32,11 @@ shopToggle.addEventListener('click', () => {
     shopScreen.classList.remove('inactive')
 })
 
-// MAP EVENT LISTENERS
 
+// DIALOGUE BOX
+let enemyInfo = document.querySelector('#enemyInfo')
+let actionsDialogue = document.querySelector('#dialogueActions')
+// MAP EVENT LISTENERS
 // MOVING CHARACTER
 window.addEventListener("keydown", (e) => {
     let playerIconMap = document.querySelector('.player-icon-map')
@@ -60,24 +63,24 @@ window.addEventListener("keydown", (e) => {
 
 
 
-// Battle Options Event Listeners
-// have to move these inside a function when its the players turn 
+// Battle Options SYSTEM + event listeners
+// win condition
+const isDead = (enemy) => {
+    if(enemy.health <= 0) {
+        actionsDialogue.innerText = `You defeated the ${enemy.name}!`
+        setTimeout(function() {
+           switchToMap() 
+        }, 6000)
+        return true
+    }
+    return false
+}
+
 // attack button
 const attackButton = document.querySelector('#attack')
 // attack animation class
 const attackAnimation = document.querySelector('.attack-animation')
 const attack = (enemy) => {
-    // win condition
-    const isDead = (enemy) => {
-        if(enemy.health <= 0) {
-            console.log('You won!')
-            setTimeout(function() {
-               switchToMap() 
-            }, 6000)
-            return true
-        }
-        return false
-    }
     attackButton.addEventListener('click', () => {
         setTimeout(function() {
             attackAnimation.classList.remove('attack-off')
@@ -93,9 +96,10 @@ const attack = (enemy) => {
         setTimeout(function() {
             playerIcon.classList.remove('attackMove')
         },1300)
-
-        enemy.health -= cloud.cloudAttack()
-        console.log('enemy health: ' + enemy.health)
+        let damageDone = cloud.cloudAttack()
+        actionsDialogue.innerText = `You dealt ${damageDone} damage!`
+        enemy.health -= damageDone
+        enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
         isDead(enemy)
         console.log(isDead(enemy))
         // if the enemy isnt dead let them attack
@@ -105,14 +109,14 @@ const attack = (enemy) => {
             let enemyIcon = document.querySelector('#enemyID')
             setTimeout(function() {
                 enemyIcon.classList.add('enemyAttack')
-            },5000)
+            },4500)
             setTimeout(function() {
                 enemyIcon.classList.remove('enemyAttack')
-            },6000)
+            },5500)
             //enemy attack
             setTimeout(function() {
                 enemyTurn(enemy)
-            },6000)
+            },5500)
         }
     })
 }
@@ -153,7 +157,7 @@ healFunction()
 
 
 
-
+const battleMoney = document.querySelector('#battleMoney')
 // steal button
 const stealOption = document.querySelector('#steal')
 const steal = (enemy) => {
@@ -161,12 +165,32 @@ const steal = (enemy) => {
         let playerIcon = document.querySelector('.player-icon')
         setTimeout(function() {
             playerIcon.classList.add('steal')
-        }, 1000)
+        }, 500)
         setTimeout(function() {
             playerIcon.classList.remove('steal')
-        }, 4000)
-
-        cloud.cloudSteal(enemy)
+        }, 3000)
+        // steal and dialogue for amount stolen 
+        let stolen = cloud.cloudSteal(enemy)
+        actionsDialogue.innerText = `You stole ${stolen} gil!`        
+        // show money in options box 
+        battleMoney.innerText = `Gil: ${cloud.money}`
+        console.log(isDead(enemy))
+        // if the enemy isnt dead let them attack
+        if(isDead(enemy) === false ) {
+            // ENEMY TURN
+            //enemy move animation
+            let enemyIcon = document.querySelector('#enemyID')
+            setTimeout(function() {
+                enemyIcon.classList.add('enemyAttack')
+            },4500)
+            setTimeout(function() {
+                enemyIcon.classList.remove('enemyAttack')
+            },5500)
+            //enemy attack
+            setTimeout(function() {
+                enemyTurn(enemy)
+            },5500)
+        }
     })
 }
 
@@ -219,7 +243,7 @@ class Enemy {
     }
 } 
 
-const monster1 = new Enemy('test', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
+const monster1 = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
 
 const cloud = {
     name: 'Cloud',
@@ -233,8 +257,10 @@ const cloud = {
 
     cloudSteal(enemy) {
         // add to clouds money a random number from the enemy money array 
-        this.money += enemy.money[Math.floor(Math.random()*enemy.money.length)]
-        console.log(this.money)
+        let moneyStolen = enemy.money[Math.floor(Math.random()*enemy.money.length)]
+        this.money += moneyStolen
+        return moneyStolen
+        
     } 
 }
 
@@ -264,6 +290,7 @@ const enemyTurn = (enemy) => {
 
 const fight = (enemy) => {
     if(enemy.health > 0) {
+        enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
         playerOptions(enemy)
     }
 }
