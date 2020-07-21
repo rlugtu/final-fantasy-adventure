@@ -9,8 +9,8 @@ body {
 }
 
 .game-window {
-    width: 1500px;
-    height: 1000px;
+    width: 1000px;
+    height: 600px;
     border: 10px solid black;
 }
 
@@ -39,56 +39,56 @@ body {
 }
 .enemy-window{
     display: flex;
-    margin-top: 40px;
-    margin-left: 50px;
-    width: 800px;
-    height: 130px;
-    border: 5px solid black;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 500px;
+    height: auto;
+    border: 3px solid black;
     background-color:  rgba(139, 127, 109, 0.8);
-    font-size: 25px;
-    justify-content: center;
-    padding: 20px;
+    font-size: 20px;
+    padding: 0 15px;
 }
 
 .enemy-icon {
     position: absolute;
-    margin-top: 200px;
-    margin-left: 1000px;
+    margin-top: 150px;
+    margin-left: 600px;
     width: 500px;
-    height: 550px;
+    height: 200px;
     background-image: url("images/monster-1.png");
-    background-size: 80%;
+    background-size: 40%;
     background-repeat: no-repeat;
 
 }
 
 .attack-animation {
     position: absolute;
-    width: 500px;
-    height: 500px;
-    margin-left: 800px;
-    margin-top: 300px;
+    width: 300px;
+    height: 300px;
+    margin-left: 500px;
+    margin-top: 200px;
     background-image: url("images/attack-animation.gif");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 .player-icon {
-    margin-top: 550px;
-    margin-left: 75px;
     position: absolute;
-    width: 500px;
-    height: 500px;
+    margin-top: 350px;
+    margin-left: 60px;
+    width: 300px;
+    height: 250px;
     background-image: url("images/cloud.png");
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
 .heal-animation {
     position: absolute;
-    width: 500px;
+    width: 300px;
     height: 500px;
-    margin-left: 40px;
-    margin-top: 600px;
+    margin-top: 375px;
+    margin-left: 25px;
     background-image: url("images/heal.gif");
     opacity:0.7;
     background-size: 100%;
@@ -99,14 +99,14 @@ body {
     display: flex;
     justify-content: center;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
-    margin-top: 500px;
-    margin-left: 750px;
-    width: 650px;
-    height: 200px;
-    border: 5px solid black;
+    margin-top: 300px;
+    margin-left: 520px;
+    width: 400px;
+    height: 125px;
+    border: 3px solid black;
     background-color:  rgba(139, 127, 109, 0.8);
-    font-size: 25px;
     padding: 20px;
 }
 #attack {
@@ -115,10 +115,10 @@ body {
     align-items: center;
     margin-top: 10px;
     margin-left: 10px;
-    width: 250px;
-    height: 50px;
-    border: 5px solid black;
-    font-size: 30px;
+    width: 150px;
+    height: 30px;
+    border: 3px solid black;
+    font-size: 20px;
 }
 #attack:hover {
     background-color: lightslategray;
@@ -129,11 +129,11 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-    margin-right: 10px;
-    width: 250px;
-    height: 50px;
-    border: 5px solid black;
-    font-size: 30px;
+    margin-left: 10px;
+    width: 150px;
+    height: 30px;
+    border: 3px solid black;
+    font-size: 20px;
 }
 #steal:hover {
     background-color: lightslategray;
@@ -143,45 +143,46 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
     margin-left: 10px;
-    margin-top: 50px;
-    width: 250px;
-    height: 50px;
-    border: 5px solid black;
-    font-size: 30px;
+    width: 150px;
+    height: 30px;
+    border: 3px solid black;
+    font-size: 20px;
 }
 #item:hover {
     background-color: lightslategray;
     cursor: pointer;
 }
 .inventory {
-    margin-top: 450px;
-    margin-left: 750px;
-    width: 650px;
-    height: 300px;
-    border: 5px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 300px;
+    margin-left: 520px;
+    width: auto;
+    height: auto;
+    border: 3px solid black;
     background-color:  rgba(139, 127, 109, 0.8);
 }
 .inventory ul {
-    width: 500px;
+    display: flex;
+    flex: wrap;
     list-style-type: none;
 }
 .inventory li {
     font-size: 20px;
-    margin-top:10px;
-    border: 5px solid black;
-    padding-left: 10px;
+    border: 3px solid black;
 }
 #run {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
-    margin-top: 50px;
-    width: 250px;
-    height: 50px;
-    border: 5px solid black;
-    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 150px;
+    height: 30px;
+    border: 3px solid black;
+    font-size: 20px;
 }
 #run:hover {
     background-color: lightslategray;
@@ -282,7 +283,7 @@ margin-top: 50px;
         transform: scale(1) translateY(0) translateX(0) rotate(0);
     }
     50%{
-        transform: scale(1) translateY(-350px) translateX(600px) rotate(0);
+        transform: scale(1) translateY(-220px) translateX(400px) rotate(0);
     }
     100%{
         transform: scale(1) translateY(0) translateX(0) rotate(0);
