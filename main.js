@@ -33,9 +33,12 @@ shopToggle.addEventListener('click', () => {
 })
 
 
-// DIALOGUE BOX
+// DIALOGUE BOXES
 let enemyInfo = document.querySelector('#enemyInfo')
 let actionsDialogue = document.querySelector('#dialogueActions')
+let playerHealth = document.querySelector('.playerHealth')
+
+
 // MAP EVENT LISTENERS
 // MOVING CHARACTER
 window.addEventListener("keydown", (e) => {
@@ -65,7 +68,7 @@ window.addEventListener("keydown", (e) => {
 
 // Battle Options SYSTEM + event listeners
 // win condition
-const isDead = (enemy) => {
+const winCondition = (enemy) => {
     if(enemy.health <= 0) {
         actionsDialogue.innerText = `You defeated the ${enemy.name}!`
         setTimeout(function() {
@@ -75,6 +78,15 @@ const isDead = (enemy) => {
     }
     return false
 }
+
+const loseCondition = (player) => {
+    if(player.health <= 0) {
+        switchToMap()
+        console.log(cloud.health)
+        alert('You Died')
+    }
+}
+
 
 // attack button
 const attackButton = document.querySelector('#attack')
@@ -96,14 +108,15 @@ const attack = (enemy) => {
         setTimeout(function() {
             playerIcon.classList.remove('attackMove')
         },1300)
+        loseCondition(cloud)
         let damageDone = cloud.cloudAttack()
         actionsDialogue.innerText = `You dealt ${damageDone} damage!`
         enemy.health -= damageDone
         enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
-        isDead(enemy)
-        console.log(isDead(enemy))
+        winCondition(enemy)
+        console.log(winCondition(enemy))
         // if the enemy isnt dead let them attack
-        if(isDead(enemy) === false ) {
+        if(winCondition(enemy) === false ) {
             // ENEMY TURN
             //enemy move animation
             let enemyIcon = document.querySelector('#enemyID')
@@ -115,7 +128,9 @@ const attack = (enemy) => {
             },5500)
             //enemy attack
             setTimeout(function() {
-                enemyTurn(enemy)
+                let damageTaken = enemyTurn(enemy)
+                actionsDialogue.innerText = `You took ${damageTaken} damage!`
+                playerHealth.innerText = `Health: ${cloud.health}`
             },5500)
         }
     })
@@ -174,9 +189,9 @@ const steal = (enemy) => {
         actionsDialogue.innerText = `You stole ${stolen} gil!`        
         // show money in options box 
         battleMoney.innerText = `Gil: ${cloud.money}`
-        console.log(isDead(enemy))
+        console.log(winCondition(enemy))
         // if the enemy isnt dead let them attack
-        if(isDead(enemy) === false ) {
+        if(winCondition(enemy) === false ) {
             // ENEMY TURN
             //enemy move animation
             let enemyIcon = document.querySelector('#enemyID')
@@ -188,7 +203,8 @@ const steal = (enemy) => {
             },5500)
             //enemy attack
             setTimeout(function() {
-                enemyTurn(enemy)
+                let damageTaken = enemyTurn(enemy)
+                actionsDialogue.innerText = `You took ${damageTaken} damage!`
             },5500)
         }
     })
@@ -243,12 +259,12 @@ class Enemy {
     }
 } 
 
-const monster1 = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
+const sixHeadDragon = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
 
 const cloud = {
     name: 'Cloud',
     attack: [1,2,3,4,5],
-    health: 100,
+    health: 1,
     money: 0,
 
     cloudAttack() {
@@ -284,16 +300,19 @@ let currentPlayer = 1
 
 // enemy attack 
 const enemyTurn = (enemy) => {
-    cloud.health -= enemy.enemyAttack()
+    let damageTaken = enemy.enemyAttack()
+    cloud.health -= damageTaken
     console.log(cloud.health)
+    return damageTaken
 }
 
 const fight = (enemy) => {
     if(enemy.health > 0) {
         enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
+        playerHealth.innerText = `Health: ${cloud.health}`
         playerOptions(enemy)
     }
 }
 
 
-fight(monster1)
+fight(sixHeadDragon)
