@@ -38,9 +38,17 @@ attackOption.addEventListener('click', () => {
         attackAnimation.classList.remove('attack-off')
     }, 1000)
     
-    setTimeout(function(){
+    setTimeout(function() {
         attackAnimation.classList.add('attack-off')
     }, 3000) 
+    let playerIcon = document.querySelector('.player-icon')
+    setTimeout(function() {
+        playerIcon.classList.add('attackMove')
+    },300)
+    setTimeout(function() {
+        playerIcon.classList.remove('attackMove')
+    },1300)
+    
 })
 
 // item button
