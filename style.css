@@ -264,7 +264,7 @@ margin-top: 50px;
     animation: steal 3s;
 }
 .run {
-    animation: run 2s;
+    animation: run 3s;
 }
 @keyframes enlarge {
     0%{

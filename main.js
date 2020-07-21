@@ -83,4 +83,9 @@ runOption.addEventListener('click', () => {
     setTimeout(function() {
         playerIcon.classList.remove('run')
     },4000)
+    setTimeout(function () {
+        mapScreen.classList.remove('inactive')
+        battleScreen.classList.add('inactive')
+        shopScreen.classList.add('inactive')
+    },3500)
 })
