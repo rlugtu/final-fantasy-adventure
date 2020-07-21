@@ -67,13 +67,16 @@ const attackButton = document.querySelector('#attack')
 // attack animation class
 const attackAnimation = document.querySelector('.attack-animation')
 const attack = (enemy) => {
+    // win condition
     const isDead = (enemy) => {
-        if(enemy.health < 0) {
+        if(enemy.health <= 0) {
             console.log('You won!')
             setTimeout(function() {
                switchToMap() 
-            }, 5000)
+            }, 6000)
+            return true
         }
+        return false
     }
     attackButton.addEventListener('click', () => {
         setTimeout(function() {
@@ -94,6 +97,23 @@ const attack = (enemy) => {
         enemy.health -= cloud.cloudAttack()
         console.log('enemy health: ' + enemy.health)
         isDead(enemy)
+        console.log(isDead(enemy))
+        // if the enemy isnt dead let them attack
+        if(isDead(enemy) === false ) {
+            // ENEMY TURN
+            //enemy move animation
+            let enemyIcon = document.querySelector('#enemyID')
+            setTimeout(function() {
+                enemyIcon.classList.add('enemyAttack')
+            },5000)
+            setTimeout(function() {
+                enemyIcon.classList.remove('enemyAttack')
+            },6000)
+            //enemy attack
+            setTimeout(function() {
+                enemyTurn(enemy)
+            },6000)
+        }
     })
 }
 
@@ -136,7 +156,7 @@ healFunction()
 
 // steal button
 const stealOption = document.querySelector('#steal')
-const steal = () => {
+const steal = (enemy) => {
     stealOption.addEventListener('click', () => {
         let playerIcon = document.querySelector('.player-icon')
         setTimeout(function() {
@@ -145,6 +165,8 @@ const steal = () => {
         setTimeout(function() {
             playerIcon.classList.remove('steal')
         }, 4000)
+
+        cloud.cloudSteal(enemy)
     })
 }
 
@@ -185,10 +207,11 @@ shopBackButton.addEventListener('click', () => {
 // ENEMY STATS
 
 class Enemy {
-    constructor(name, health, attack) {
+    constructor(name, health, attack,money) {
         this.name = name;
         this.health = health;
         this.attack = attack;
+        this.money = money;
     }
     enemyAttack() {
         // return a random number from the range of damages the monster can make
@@ -196,24 +219,47 @@ class Enemy {
     }
 } 
 
-const monster1 = new Enemy('test', 10, [1,2,3,4,5]) 
+const monster1 = new Enemy('test', 10, [1,2,3,4,5], [5,5,10,10,15,50]) 
 
 const cloud = {
     name: 'Cloud',
     attack: [1,2,3,4,5],
     health: 100,
+    money: 0,
 
     cloudAttack() {
         return(this.attack[Math.floor(Math.random()*this.attack.length)])
-    }
+    },
+
+    cloudSteal(enemy) {
+        // add to clouds money a random number from the enemy money array 
+        this.money += enemy.money[Math.floor(Math.random()*enemy.money.length)]
+        console.log(this.money)
+    } 
 }
+
 
 // fight sequence
 const playerOptions = (enemy) => {
     attack(enemy)
     items()
-    steal()
+    steal(enemy)
     run()
+}
+const switchTurn = (player) => {
+    if(player === 1) {
+        currentPlayer = 0
+    }
+    else {
+        currentPlayer = 1
+    }
+}
+let currentPlayer = 1
+
+// enemy attack 
+const enemyTurn = (enemy) => {
+    cloud.health -= enemy.enemyAttack()
+    console.log(cloud.health)
 }
 
 const fight = (enemy) => {
@@ -221,5 +267,6 @@ const fight = (enemy) => {
         playerOptions(enemy)
     }
 }
+
 
 fight(monster1)

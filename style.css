@@ -324,6 +324,10 @@ body {
 .attackMove {
     animation: attack 1s;
 }
+
+.enemyAttack {
+    animation: enemyAttack 1s;
+}
 @keyframes enlarge {
     0%{
         transform: scale(0) rotate(0);
@@ -388,5 +392,19 @@ body {
     100%{
         transform: scale(1);
         opacity:0
+    }
+}
+
+@keyframes enemyAttack {
+    0%{
+        transform: scale(1) translateY(0) translateX(0) rotate(0);
+    }
+    50%{
+        transform: scale(1) translateY(0) translateX(-40px) rotate(0);
+
+    }
+    100%{
+        transform: scale(1) translateY(0) translateX(0) rotate(0);
+
     }
 }
