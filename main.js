@@ -59,6 +59,21 @@ backButton.addEventListener('click', () => {
     allOptions.classList.remove('off')
     inventory.classList.add('off')
 })
+// HEAL FUNCTION
+const healFunction = () => {
+    let healAnimation = document.querySelector('.heal-animation')
+        setTimeout(function() {
+            healAnimation.classList.remove('heal-off')
+        }, 500)
+        setTimeout(function() {
+            healAnimation.classList.add('heal-off')
+        }, 3500)
+}
+healFunction()
+
+
+
+
 
 // steal button
 const stealOption = document.querySelector('#steal')
@@ -88,4 +103,15 @@ runOption.addEventListener('click', () => {
         battleScreen.classList.add('inactive')
         shopScreen.classList.add('inactive')
     },3500)
+})
+
+
+// SHOP EVENT LISTENERS 
+
+// BACK BUTTON
+const shopBackButton = document.querySelector('#shopBack')
+shopBackButton.addEventListener('click', () => {
+    mapScreen.classList.remove('inactive')
+    battleScreen.classList.add('inactive')
+    shopScreen.classList.add('inactive')
 })
