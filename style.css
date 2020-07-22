@@ -34,6 +34,20 @@ body {
     background-repeat: no-repeat;
     background-size: 70%;
 }
+#playerHealthMap {
+    display:flex;
+    align-items: center;
+    position: absolute;
+    margin-top: 524px;
+    margin-left: 600px;
+    padding-left: 10px;
+    width: 150px;
+    height: 40px;
+    border: 3px solid black;
+    background-color:  rgba(139, 127, 109, 0.8);
+    font-weight: bold;
+    font-size: 18px;
+}
 
 #sixHeadedDragon {
     position: absolute;
@@ -297,8 +311,8 @@ body {
 .shop {
     width: 100%;
     height: 100%;
-    /* background-image: url("./images/map.jpg");
-    background-size: 100%; */
+    background-image: url("./images/shop.jpg");
+    background-size: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -322,6 +336,20 @@ body {
     margin-top: 20px;
     border: 3px solid black;
 }
+
+.potion:hover {
+    background-color: lightslategray;
+    cursor: pointer;    
+}
+.hiPotion:hover {
+    background-color: lightslategray;
+    cursor: pointer;    
+}
+.megaPotion:hover {
+    background-color: lightslategray;
+    cursor: pointer;    
+}
+
 
 
 #shopBack:hover {
