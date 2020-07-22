@@ -64,10 +64,12 @@ const switchToMap = () => {
 }
 
 const switchToBattle = () => {
+    battleMoney.innerText = `Gil: ${cloud.money}`
     startScreen.classList.add('inactive')
     mapScreen.classList.add('inactive')
     battleScreen.classList.remove('inactive')
     shopScreen.classList.add('inactive')
+    
     return
 }
 
