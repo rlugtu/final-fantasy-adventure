@@ -96,9 +96,6 @@ let playerHealth = document.querySelector('.playerHealth')
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
         actionsDialogue.innerText = `You defeated the ${enemy.name}!`
-        setTimeout(function() {
-           switchToMap() 
-        }, 6000)
         return true
     }
     return false
@@ -290,7 +287,7 @@ class Enemy {
     }
 } 
 
-const sixHeadDragon = new Enemy('6 Headed Dragon', 10, [1,2,3,4,5], [5,5,10,10,15,50])
+const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15,50])
 sixHeadDragon.url = './images/monster-1.png '
 
 const snakeBlades =new Enemy('Snake Blades', 20, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
@@ -322,6 +319,7 @@ const cloud = {
 
 // fight sequence
 const playerOptions = (enemy) => {
+    // creates event listeners for battle options
     attack(enemy)
     items()
     steal(enemy)
@@ -340,12 +338,12 @@ const enemyTurn = (enemy) => {
 let enemyIcon = document.querySelector('.enemy-icon')
 const fight = (enemy) => {
     // change the Enemy Icon based on Monster
+    // reset enemy health everytime its clicked
+    enemy.health = enemy.maxHealth
     enemyIcon.style.backgroundImage = `url('${enemy.url}')`
-    if(enemy.health > 0) {
-        enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
-        playerHealth.innerText = `Health: ${cloud.health}`
-        playerOptions(enemy)
-    }
+    enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
+    playerHealth.innerText = `Health: ${cloud.health}`
+    playerOptions(enemy)
 }
 
 // let enemyIcon = document.querySelector('#enemy-con')
