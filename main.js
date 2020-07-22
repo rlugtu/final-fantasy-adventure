@@ -239,6 +239,17 @@ const loseCondition = (player) => {
     return
 }
 
+// ENEMY ATTACK ANIMATION
+let enemyAttack = document.querySelector('.enemy-animation')
+let enemyAttackAnimation = () => {
+    setTimeout(function() {
+        enemyAttack.classList.remove('attack-off')
+    }, 1000)
+    
+    setTimeout(function() {
+        enemyAttack.classList.add('attack-off')
+    }, 3000) 
+}
 
 // attack button
 const attackButton = document.querySelector('#attack')
@@ -274,6 +285,8 @@ const attack = (enemy) => {
             // ENEMY TURN
             //enemy move animation
             let enemyIcon = document.querySelector('.enemy-icon')
+            // ENEMY ATTACK ANIMATION
+            setTimeout(enemyAttackAnimation,4500)
             setTimeout(function() {
                 enemyIcon.classList.add('enemyAttack')
             },4500)
@@ -296,22 +309,22 @@ const attack = (enemy) => {
 // item button
 const itemOption = document.querySelector('#item')
 let allOptions = document.querySelector('.player-options')
-
-const items = () => {
-    itemOption.addEventListener('click', () => {
-        let inventory = document.querySelector('.inventory')
+const showItems = () => {
+    let inventory = document.querySelector('.inventory')
         allOptions.classList.add('off')
         inventory.classList.remove('off')
-    })
-    // open inventory after item button is clicked
-    const backButton = document.querySelector('#backButton')
-    
-    backButton.addEventListener('click', () => {
-        let inventory = document.querySelector('.inventory')
+}
+const hideItems = () => {
+    let inventory = document.querySelector('.inventory')
         allOptions.classList.remove('off')
         inventory.classList.add('off')
         return
-    })
+}
+const items = () => {
+    itemOption.addEventListener('click', showItems)
+    // open inventory after item button is clicked
+    const backButton = document.querySelector('#backButton')
+    backButton.addEventListener('click', hideItems)
     return
 }
 //USING POTIONS
@@ -329,11 +342,13 @@ let battleMegaPotion = document.querySelector('#battleMegaPotion')
 battlePotion.addEventListener('click', () => {
     if(cloud.potion > 0) {
         console.log(cloud.health)
+        healAnimation()
         cloud.health += potionHeals.potion
         actionsDialogue.innerText = `You Healed ${potionHeals.potion} HP!`   
         playerHealth.innerText = `Health: ${cloud.health}`    
         console.log(cloud.health) 
         cloud.potion--
+        hideItems()
     }
     else {
         alert('You dont have Potions!')
@@ -342,11 +357,13 @@ battlePotion.addEventListener('click', () => {
 battleHiPotion.addEventListener('click', () => {
     if(cloud.hiPotion > 0) {
         console.log(cloud.health)
+        healAnimation()
         cloud.health += potionHeals.hiPotion
         actionsDialogue.innerText = `You Healed ${potionHeals.hiPotion} HP!`
         playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.hiPotion--
         console.log(cloud.health) 
+        hideItems()
     }
     else {
         alert('You dont have Hi-Potions!')
@@ -355,11 +372,13 @@ battleHiPotion.addEventListener('click', () => {
 battleMegaPotion.addEventListener('click', () => {
     if(cloud.megaPotion > 0) {
         console.log(cloud.health)
+        healAnimation()
         cloud.health += potionHeals.megaPotion
         actionsDialogue.innerText = `You Healed ${potionHeals.megaPotion} HP!`
         playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.megaPotion--
         console.log(cloud.health) 
+        hideItems()
     }
     else {
         alert('You dont have Mega Potions!')

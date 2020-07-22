@@ -189,6 +189,16 @@ padding-left: 5px;
 
 }
 
+.player-icon {
+    margin-top: 350px;
+    margin-left: 60px;
+    width: 300px;
+    height: 250px;
+    background-image: url("./images/cloud.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
 .attack-animation {
     position: absolute;
     width: 300px;
@@ -200,16 +210,17 @@ padding-left: 5px;
     background-repeat: no-repeat;
 }
 
-.player-icon {
+.enemy-animation {
     position: absolute;
-    margin-top: 350px;
-    margin-left: 60px;
     width: 300px;
-    height: 250px;
-    background-image: url("./images/cloud.png");
+    height: 300px;
+    margin-left: 150px;
+    margin-top: 350px;
+    background-image: url("./images/enemyAttack.gif");
     background-size: 100%;
     background-repeat: no-repeat;
 }
+
 
 .heal-animation {
     position: absolute;
