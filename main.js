@@ -331,10 +331,10 @@ const hideItems = () => {
         return
 }
 const items = () => {
-    itemOption.addEventListener('click', showItems)
     // open inventory after item button is clicked
     const backButton = document.querySelector('#backButton')
     backButton.addEventListener('click', hideItems)
+    itemOption.addEventListener('click', showItems)
     return
 }
 //USING POTIONS

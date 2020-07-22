@@ -338,6 +338,7 @@ padding-left: 5px;
     cursor: pointer;
 }
 .inventory {
+    position: absolute;
     margin-top: 343px;
     margin-left: 520px;
     width: auto;
