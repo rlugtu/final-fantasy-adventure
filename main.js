@@ -22,16 +22,15 @@ snakeBlades.url = './images/snakeBlades.png'
 const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,50], [10,10,10,15,15,25,25,50,100])
 skulls.url = './images/skulls.png'
 
-
 // CLOUD
 const cloud = {
     name: 'Cloud',
     attack: [1,2,3,4,5],
     health: 100,
     money: 50,
-    potion: 0,
-    hiPotion: 0,
-    megaPotion: 0,
+    potion: 1,
+    hiPotion: 1,
+    megaPotion: 1,
 
     cloudAttack() {
         return(this.attack[Math.floor(Math.random()*this.attack.length)])
@@ -44,56 +43,12 @@ const cloud = {
     } 
 }
 
-// SHOP OPTIONS AND EVENT LISTENERS
-const itemsCost = {
-    potion: 5,
-    hiPotion: 10,
-    megaPotion: 20,
-}
-let shopPotion = document.querySelector('.potion')
-let hiPotion = document.querySelector('.hiPotion')
-let megaPotion = document.querySelector('.megaPotion')
-shopPotion.addEventListener('click', () => {
-    if(itemsCost.potion < cloud.money) {
-        cloud.potion++
-        cloud.money -= itemsCost.potion
-        shopPotion.innerText = `Potion ${cloud.potion}`
-    }
-    else {
-        alert('not enough money')
-    }
-})
-hiPotion.addEventListener('click', () => {
-    if(itemsCost.hiPotion < cloud.money) {
-        cloud.hiPotion++
-        cloud.money -= itemsCost.hiPotion
-        hiPotion.innerText = `Hi-Potion ${cloud.hiPotion}`
 
-    }
-    else {
-        alert('not enough money')
-    }
-})
-megaPotion.addEventListener('click', () => {
-    if(itemsCost.megaPotion < cloud.money) {
-        cloud.megaPotion++
-        cloud.money -= itemsCost.megaPotion
-        megaPotion.innerText = `MegaPotion ${cloud.megaPotion}`
-    }
-    else {
-        alert('not enough money')
-    }
-})
-
-
-
-// Screen divs 
+// SCREEN TOGGLES 
 const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 
-
-// SCREEN TOGGLES 
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
@@ -114,26 +69,79 @@ const switchToBattle = () => {
     return
 }
 
-
-// BUTTONS JUST FOR TESTING
-mapToggle.addEventListener('click', () => {
-    mapScreen.classList.remove('inactive')
-    battleScreen.classList.add('inactive')
-    shopScreen.classList.add('inactive')
-    return
-})
-battleToggle.addEventListener('click', () => {
-    mapScreen.classList.add('inactive')
-    battleScreen.classList.remove('inactive')
-    shopScreen.classList.add('inactive')
-    return
-})
-shopToggle.addEventListener('click', () => {
+const switchToShop = () => {
+    updateShopMoney()
     mapScreen.classList.add('inactive')
     battleScreen.classList.add('inactive')
     shopScreen.classList.remove('inactive')
     return
+}
+
+
+// BUTTONS JUST FOR TESTING
+mapToggle.addEventListener('click', switchToMap)
+battleToggle.addEventListener('click', switchToBattle)
+shopToggle.addEventListener('click', switchToShop)
+
+
+// SHOP OPTIONS AND EVENT LISTENERS
+const itemsCost = {
+    potion: 5,
+    hiPotion: 10,
+    megaPotion: 20,
+}
+const potionHeals = {
+    potion: 10,
+    hiPotion: 20,
+    megaPotion: 40,
+}
+let shopPotion = document.querySelector('.potion')
+let hiPotion = document.querySelector('.hiPotion')
+let megaPotion = document.querySelector('.megaPotion')
+shopPotion.addEventListener('click', () => {
+    if(itemsCost.potion < cloud.money) {
+        cloud.potion++
+        cloud.money -= itemsCost.potion
+        shopPotion.innerText = `Potion ${cloud.potion}`
+        updateShopMoney()
+    }
+    else {
+        alert('not enough money')
+    }
 })
+hiPotion.addEventListener('click', () => {
+    if(itemsCost.hiPotion < cloud.money) {
+        cloud.hiPotion++
+        cloud.money -= itemsCost.hiPotion
+        hiPotion.innerText = `Hi-Potion ${cloud.hiPotion}`
+        updateShopMoney()
+    }
+    else {
+        alert('not enough money')
+    }
+})
+megaPotion.addEventListener('click', () => {
+    if(itemsCost.megaPotion < cloud.money) {
+        cloud.megaPotion++
+        cloud.money -= itemsCost.megaPotion
+        megaPotion.innerText = `MegaPotion ${cloud.megaPotion}`
+        updateShopMoney()
+    }
+    else {
+        alert('not enough money')
+    }
+})
+// SHOP BACK BUTTON
+const shopBackButton = document.querySelector('#shopBack')
+shopBackButton.addEventListener('click', switchToMap)
+
+const shopMoney = document.querySelector('.shopMoney')
+const updateShopMoney = () => {
+    shopMoney.innerText = `Gil: ${cloud.money}`
+}
+
+
+
 
 
 
@@ -185,7 +193,7 @@ skullsMapIcon.addEventListener('click', () => {
 // MAP HEALTH AND INVENTORY UPDATES 
 let mapHealth = document.querySelector('#playerHealthMap')
 mapHealth.innerText = `Health: ${cloud.health}`
-
+// UPDATE MAP HEALTH 
 const updateMapHealth = () => {
     mapHealth.innerText = `Health: ${cloud.health}`
 }
@@ -193,8 +201,7 @@ const updateMapHealth = () => {
 let mapPotion = document.querySelector('.mapPotion')
 let mapHiPotion = document.querySelector('.mapHiPotion')
 let mapMegaPotion = document.querySelector('.mapMegaPotion')
-
-
+// UPDATE POTIONS 
 const updateMapInventory = () => {
     mapPotion.innerText = cloud.potion + ' ' + 'Potion'
     mapHiPotion.innerText = cloud.hiPotion + ' ' + 'Hi-Potion'
@@ -202,6 +209,8 @@ const updateMapInventory = () => {
 
     
 }
+
+
 
 // Battle SYSTEM + event listeners
 // DIALOGUE BOXES
@@ -305,9 +314,56 @@ const items = () => {
     })
     return
 }
+//USING POTIONS
+let healFunc = (potionHeals) => {
+    if(cloud.potion > 0) {
+        console.log(cloud)
+        cloud.health += potionHeals.pot
+        console.log(cloud)
+    }
+}
 
-// HEAL FUNCTION
-const healFunction = () => {
+let battlePotion = document.querySelector('#battlePotion') 
+let battleHiPotion = document.querySelector('#battleHiPotion')
+let battleMegaPotion = document.querySelector('#battleMegaPotion')
+battlePotion.addEventListener('click', () => {
+    if(cloud.potion > 0) {
+        console.log(cloud.health)
+        cloud.health += potionHeals.potion
+        console.log(cloud.health) 
+        cloud.potion--
+    }
+    else {
+        alert('You dont have Potions!')
+    }
+}) 
+battleHiPotion.addEventListener('click', () => {
+    if(cloud.hiPotion > 0) {
+        console.log(cloud.health)
+        cloud.health += potionHeals.hiPotion
+        cloud.hiPotion--
+        console.log(cloud.health) 
+    }
+    else {
+        alert('You dont have Hi-Potions!')
+    }
+})
+battleMegaPotion.addEventListener('click', () => {
+    if(cloud.megaPotion > 0) {
+        console.log(cloud.health)
+        cloud.health += potionHeals.megaPotion
+        cloud.megaPotion--
+        console.log(cloud.health) 
+    }
+    else {
+        alert('You dont have Mega Potions!')
+    }
+})
+
+
+
+// HEAL ANIMATION
+const healAnimation = () => {
     let healAnimation = document.querySelector('.heal-animation')
         setTimeout(function() {
             healAnimation.classList.remove('heal-off')
@@ -317,8 +373,6 @@ const healFunction = () => {
         }, 3500)
         return
 }
-healFunction()
-
 
 
 
@@ -378,12 +432,6 @@ const run = () => {
 }
 
 
-// SHOP EVENT LISTENERS 
-
-// BACK BUTTON
-const shopBackButton = document.querySelector('#shopBack')
-shopBackButton.addEventListener('click', switchToMap)
-
 
 
 // fight sequence
@@ -404,10 +452,10 @@ const enemyTurn = (enemy) => {
 let enemyIcon = document.querySelector('.enemy-icon')
 //FIGHT FUNCTION
 const fight = (enemy) => {
-    // reset enemy health everytime its clicked
+    // reset enemy health everytime new fight is initiated 
     enemy.health = enemy.maxHealth
-    // change the Enemy Icon based on Monster
     actionsDialogue.innerText = ''
+     // change the Enemy Icon based on Monster
     enemyIcon.style.backgroundImage = `url('${enemy.url}')`
     enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
     playerHealth.innerText = `Health: ${cloud.health}`
