@@ -48,12 +48,14 @@ const cloud = {
 const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
+const startScreen = document.querySelector('.startScreen')
+const startButton = document.querySelector('#startButton')
 
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
-
 const switchToMap = () => {
+    startScreen.classList.add('inactive')
     mapScreen.classList.remove('inactive')
     battleScreen.classList.add('inactive')
     shopScreen.classList.add('inactive')
@@ -63,6 +65,7 @@ const switchToMap = () => {
 }
 
 const switchToBattle = () => {
+    startScreen.classList.add('inactive')
     mapScreen.classList.add('inactive')
     battleScreen.classList.remove('inactive')
     shopScreen.classList.add('inactive')
@@ -70,12 +73,16 @@ const switchToBattle = () => {
 }
 
 const switchToShop = () => {
+    startScreen.classList.add('inactive')
     updateShopMoney()
     mapScreen.classList.add('inactive')
     battleScreen.classList.add('inactive')
     shopScreen.classList.remove('inactive')
     return
 }
+
+//START BUTTON
+startButton.addEventListener('click', switchToMap)
 
 
 // BUTTONS JUST FOR TESTING
