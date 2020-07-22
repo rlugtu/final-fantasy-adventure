@@ -49,7 +49,6 @@ const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
-const startButton = document.querySelector('#startButton')
 
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
@@ -81,9 +80,13 @@ const switchToShop = () => {
     return
 }
 
-//START BUTTON
+//START BUTTON && START OVER 
+const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', switchToMap)
-
+const startOver = document.querySelector('#startOver')
+startOver.addEventListener('click', () => {
+    location.reload();
+})
 
 // BUTTONS JUST FOR TESTING
 mapToggle.addEventListener('click', switchToMap)
