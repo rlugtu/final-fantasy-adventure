@@ -35,7 +35,7 @@ body {
     background-size: 70%;
 }
 
-.monster1 {
+#sixHeadedDragon {
     position: absolute;
     width: 100px;
     height: 80px;
@@ -45,6 +45,40 @@ body {
     background-repeat: no-repeat;
     background-size: 70%;
 }
+#sixHeadedDragon:hover {
+    cursor: pointer;
+}
+
+#snakeBlades {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    margin-top: 100px;
+    margin-left: 300px;
+    background-image:url("./images/snakeBlades.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+#snakeBlades:hover {
+    cursor: pointer;
+}
+
+#skulls {
+    position: absolute;
+    width: 100px;
+    height: 80px;
+    margin-top: 400px;
+    margin-left: 550px;
+    background-image:url("./images/skulls.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+}
+#skulls:hover {
+    cursor: pointer;
+}
+
+
+
 
 
 

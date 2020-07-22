@@ -16,6 +16,13 @@ const switchToMap = () => {
     shopScreen.classList.add('inactive')
 }
 
+const switchToBattle = () => {
+    mapScreen.classList.add('inactive')
+    battleScreen.classList.remove('inactive')
+    shopScreen.classList.add('inactive')
+}
+
+// BUTTONS JUST FOR TESTING
 mapToggle.addEventListener('click', () => {
     mapScreen.classList.remove('inactive')
     battleScreen.classList.add('inactive')
@@ -32,11 +39,6 @@ shopToggle.addEventListener('click', () => {
     shopScreen.classList.remove('inactive')
 })
 
-
-// DIALOGUE BOXES
-let enemyInfo = document.querySelector('#enemyInfo')
-let actionsDialogue = document.querySelector('#dialogueActions')
-let playerHealth = document.querySelector('.playerHealth')
 
 
 // MAP EVENT LISTENERS
@@ -64,9 +66,32 @@ window.addEventListener("keydown", (e) => {
     }
 });
 
+const sixHeadDragonMapIcon = document.querySelector('#sixHeadedDragon')
+const snakeBladesMapIcon = document.querySelector('#snakeBlades')
+const skullsMapIcon = document.querySelector('#skulls')
+sixHeadDragonMapIcon.addEventListener('click', () => {
+    fight(sixHeadDragon)
+    switchToBattle()
+    }
+)
+snakeBladesMapIcon.addEventListener('click', () => {
+    fight(snakeBlades)
+    switchToBattle()
+})
+skullsMapIcon.addEventListener('click', () => {
+    fight(skulls)
+    switchToBattle()
+})
 
 
-// Battle Options SYSTEM + event listeners
+
+
+// Battle SYSTEM + event listeners
+// DIALOGUE BOXES
+let enemyInfo = document.querySelector('#enemyInfo')
+let actionsDialogue = document.querySelector('#dialogueActions')
+let playerHealth = document.querySelector('.playerHealth')
+
 // win condition
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
@@ -78,12 +103,13 @@ const winCondition = (enemy) => {
     }
     return false
 }
-
+// lost condition
 const loseCondition = (player) => {
     if(player.health <= 0) {
         switchToMap()
         console.log(cloud.health)
         alert('You Died')
+        cloud.health = 1
     }
 }
 
@@ -172,8 +198,8 @@ healFunction()
 
 
 
-const battleMoney = document.querySelector('#battleMoney')
 // steal button
+const battleMoney = document.querySelector('#battleMoney')
 const stealOption = document.querySelector('#steal')
 const steal = (enemy) => {
     stealOption.addEventListener('click', () => {
@@ -253,10 +279,14 @@ class Enemy {
         this.health = health;
         this.attack = attack;
         this.money = money;
+        this.maxHealth = health
     }
     enemyAttack() {
         // return a random number from the range of damages the monster can make
         return this.attack[Math.floor(Math.random()*this.attack.length)]
+    }
+    enemyHealthRegen() {
+        this.health = this.maxHealth
     }
 } 
 
@@ -319,5 +349,4 @@ const fight = (enemy) => {
 }
 
 // let enemyIcon = document.querySelector('#enemy-con')
-fight(skulls)
 
