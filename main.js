@@ -102,6 +102,8 @@ const switchToMap = () => {
     mapScreen.classList.remove('inactive')
     battleScreen.classList.add('inactive')
     shopScreen.classList.add('inactive')
+    updateMapInventory()
+    updateMapHealth()
     return
 }
 
@@ -180,10 +182,26 @@ skullsMapIcon.addEventListener('click', () => {
     return
 })
 
+// MAP HEALTH AND INVENTORY UPDATES 
 let mapHealth = document.querySelector('#playerHealthMap')
 mapHealth.innerText = `Health: ${cloud.health}`
 
+const updateMapHealth = () => {
+    mapHealth.innerText = `Health: ${cloud.health}`
+}
 
+let mapPotion = document.querySelector('.mapPotion')
+let mapHiPotion = document.querySelector('.mapHiPotion')
+let mapMegaPotion = document.querySelector('.mapMegaPotion')
+
+
+const updateMapInventory = () => {
+    mapPotion.innerText = cloud.potion + ' ' + 'Potion'
+    mapHiPotion.innerText = cloud.hiPotion + ' ' + 'Hi-Potion'
+    mapMegaPotion.innerText = cloud.megaPotion + ' ' + 'MegaPotion'
+
+    
+}
 
 // Battle SYSTEM + event listeners
 // DIALOGUE BOXES
@@ -195,6 +213,7 @@ let playerHealth = document.querySelector('.playerHealth')
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
         actionsDialogue.innerText = `You defeated the ${enemy.name}!`
+        mapHealth.innerText = `Health: ${cloud.health}`
         return true
     }
     return false
@@ -353,11 +372,7 @@ const run = () => {
         setTimeout(function() {
             playerIcon.classList.remove('run')
         },4000)
-        setTimeout(function () {
-            mapScreen.classList.remove('inactive')
-            battleScreen.classList.add('inactive')
-            shopScreen.classList.add('inactive')
-        },3500)
+        setTimeout(switchToMap,3500)
     })
     return
 }
@@ -367,14 +382,7 @@ const run = () => {
 
 // BACK BUTTON
 const shopBackButton = document.querySelector('#shopBack')
-shopBackButton.addEventListener('click', () => {
-    mapScreen.classList.remove('inactive')
-    battleScreen.classList.add('inactive')
-    shopScreen.classList.add('inactive')
-})
-
-
-
+shopBackButton.addEventListener('click', switchToMap)
 
 
 
