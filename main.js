@@ -330,6 +330,8 @@ battlePotion.addEventListener('click', () => {
     if(cloud.potion > 0) {
         console.log(cloud.health)
         cloud.health += potionHeals.potion
+        actionsDialogue.innerText = `You Healed ${potionHeals.potion} HP!`   
+        playerHealth.innerText = `Health: ${cloud.health}`    
         console.log(cloud.health) 
         cloud.potion--
     }
@@ -341,6 +343,8 @@ battleHiPotion.addEventListener('click', () => {
     if(cloud.hiPotion > 0) {
         console.log(cloud.health)
         cloud.health += potionHeals.hiPotion
+        actionsDialogue.innerText = `You Healed ${potionHeals.hiPotion} HP!`
+        playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.hiPotion--
         console.log(cloud.health) 
     }
@@ -352,6 +356,8 @@ battleMegaPotion.addEventListener('click', () => {
     if(cloud.megaPotion > 0) {
         console.log(cloud.health)
         cloud.health += potionHeals.megaPotion
+        actionsDialogue.innerText = `You Healed ${potionHeals.megaPotion} HP!`
+        playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.megaPotion--
         console.log(cloud.health) 
     }
