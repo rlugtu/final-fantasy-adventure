@@ -510,8 +510,10 @@ padding-left: 5px;
     cursor: pointer;    
 }
 
-
-
+.busterSword:hover {
+    background-color: lightslategray;
+    cursor: pointer;
+}
 #shopBack:hover {
     background-color: lightslategray;
     cursor: pointer;

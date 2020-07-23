@@ -30,10 +30,11 @@ const cloud = {
     name: 'Cloud',
     attack: [1,2,3,4,5],
     health: 100,
-    money: 50,
+    money: 200,
     potion: 1,
     hiPotion: 1,
     megaPotion: 1,
+    currentWeapon: 'Basic Sword',
 
     cloudAttack() {
         return(this.attack[Math.floor(Math.random()*this.attack.length)])
@@ -107,6 +108,7 @@ const itemsCost = {
     potion: 5,
     hiPotion: 10,
     megaPotion: 20,
+    busterSword: 100,
 }
 const potionHeals = {
     potion: 10,
@@ -117,6 +119,8 @@ const potionHeals = {
 let shopPotion = document.querySelector('.potion')
 let hiPotion = document.querySelector('.hiPotion')
 let megaPotion = document.querySelector('.megaPotion')
+let busterSword = document.querySelector('.busterSword')
+
 shopPotion.addEventListener('click', () => {
     if(itemsCost.potion < cloud.money) {
         cloud.potion++
@@ -145,6 +149,16 @@ megaPotion.addEventListener('click', () => {
         cloud.money -= itemsCost.megaPotion
         megaPotion.innerText = `MegaPotion ${cloud.megaPotion}`
         updateShopMoney()
+    }
+    else {
+        alert('not enough money')
+    }
+})
+busterSword.addEventListener('click', () => {
+    if(itemsCost.busterSword < cloud.money) {
+        cloud.currentWeapon = 'busterSword'
+        cloud.attack = [10,,10,10,20,20,25,25,30,60,80]
+        busterSword.innerText = `BuserSword: 1`
     }
     else {
         alert('not enough money')
