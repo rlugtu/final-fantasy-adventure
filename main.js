@@ -165,7 +165,7 @@ const updateShopMoney = () => {
 const playerIconMap = document.querySelector('.player-icon-map')
 let targetPosition = (e) => {
     let xPosition = e.clientX - (playerIconMap.offsetWidth/2);
-    let yPosition = e.clientY - 120;
+    let yPosition = e.clientY - 130;
 
     let value = "translate3d(" + xPosition + "px, " + yPosition + "px, 0)";
     playerIconMap.style.transform = value
@@ -180,29 +180,60 @@ const hornDemonIcon = document.querySelector('#hornDemon')
 const cactuarIcon = document.querySelector('#cactuar')
 // Trigger Battle with monsters event listeners
 sixHeadDragonMapIcon.addEventListener('click', () => {
-    fight(sixHeadDragon)
-    switchToBattle()
-    return
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let battleAsk = confirm('Would You like to fight the Six Headed Dragon?' )
+        if(battleAsk) {
+            switchToBattle()
+            fight(sixHeadDragon)
+        }
+        return
+    },1000)
 })
 snakeBladesMapIcon.addEventListener('click', () => {
-    fight(snakeBlades)
-    switchToBattle()
-    return
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let battleAsk = confirm('Would You like to fight SnakeBlades?' )
+        if(battleAsk) {
+        
+            switchToBattle()
+            fight(snakeBlades)
+        }
+        return
+    },1000)
 })
 skullsMapIcon.addEventListener('click', () => {
-    fight(skulls)
-    switchToBattle()
-    return
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let battleAsk = confirm('Would You like to fight Skulls?' )
+        if(battleAsk) {
+            switchToBattle()
+            fight(skulls)
+        }
+        return
+    },1000)
 })
 hornDemonIcon.addEventListener('click', () => {
-    fight(hornDemon)
-    switchToBattle()
-    return
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let battleAsk = confirm('Would You like to fight the Horn Demon?' )
+        if(battleAsk) {
+            switchToBattle()
+            fight(hornDemon)
+        }
+        return
+    },1000)
 })
 cactuarIcon.addEventListener('click', () => {
-    fight(cactuar)
-    switchToBattle()
-    return
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
+        if(battleAsk) {
+            switchToBattle()
+            fight(cactuar)
+        }
+        return
+    },1000)
 })
 // MAP HEALTH AND INVENTORY UPDATES 
 let mapHealth = document.querySelector('#playerHealthMap')
@@ -502,7 +533,7 @@ let enemyAttackAnimation = () => {
     enemyAttack.classList.remove('attack-off')
     setTimeout(function() {
         enemyAttack.classList.add('attack-off')
-    }, 3000) 
+    }, 2000) 
 }
 let enemyMoveAttackAnimation = () => {
     enemyIcon.classList.add('enemyAttack')
@@ -526,6 +557,7 @@ const enemyTurn = (enemy) => {
             cloud.health -= damageTaken
             playerHealth.innerText = `Health: ${cloud.health}`
         },5500)
+        loseCondition(cloud)
     return 
 }
 
