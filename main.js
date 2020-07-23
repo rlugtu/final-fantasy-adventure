@@ -160,34 +160,17 @@ const updateShopMoney = () => {
 }
 
 
-
-
-
-
 // MAP EVENT LISTENERS
 // MOVING CHARACTER
-window.addEventListener("keydown", (e) => {
-    let playerIconMap = document.querySelector('.player-icon-map')
-    // key up
-    if(e.keyCode == "38" ) {
-        console.log('up')
-        playerIconMap.style.marginTop = playerIconMap.style.marginTop - 20 + 'px';
-    }
-    //key down
-    else if(e.keyCode =="40") {
-        console.log('down')
-        playerIconMap.style.marginTop = playerIconMap.style.marginTop + 20 + 'px';
-    }
-    // key left
-    else if(e.keyCode =="37") {
-        console.log('left')
-    }
+const playerIconMap = document.querySelector('.player-icon-map')
+let targetPosition = (e) => {
+    let xPosition = e.clientX - (playerIconMap.offsetWidth/2);
+    let yPosition = e.clientY - 120;
 
-    // key right
-    else if(e.keyCode == "39") {
-        console.log('right')
-    }
-});
+    let value = "translate3d(" + xPosition + "px, " + yPosition + "px, 0)";
+    playerIconMap.style.transform = value
+}
+mapScreen.addEventListener('click',targetPosition)
 
 // MONSTERS ON MAP 
 const sixHeadDragonMapIcon = document.querySelector('#sixHeadedDragon')

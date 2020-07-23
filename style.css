@@ -61,9 +61,8 @@ body {
 }
 
 .player-icon-map {
-    position: absolute;
-    margin-top: 515px;
-    margin-left: 150px;
+    top: 515px;
+    left: 150px;
     width: 100px;
     height: 80px;
     background-image:url("./images/player-icon.png");
