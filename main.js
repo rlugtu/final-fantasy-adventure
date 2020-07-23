@@ -164,8 +164,8 @@ const updateShopMoney = () => {
 // MOVING CHARACTER
 const playerIconMap = document.querySelector('.player-icon-map')
 let targetPosition = (e) => {
-    let xPosition = e.clientX - (playerIconMap.offsetWidth/2);
-    let yPosition = e.clientY - 130;
+    let xPosition = e.clientX - 70;
+    let yPosition = e.clientY - 170;
 
     let value = "translate3d(" + xPosition + "px, " + yPosition + "px, 0)";
     playerIconMap.style.transform = value
@@ -227,10 +227,15 @@ hornDemonIcon.addEventListener('click', () => {
 cactuarIcon.addEventListener('click', () => {
     mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
-        let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
-        if(battleAsk) {
+        if(winCondition(sixHeadDragon)) {
+            let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
+            if(battleAsk) {
             switchToBattle()
             fight(cactuar)
+            }
+        }
+        else {
+            alert('You have not yet earned the right to fight Cactuar')
         }
         return
     },1000)
