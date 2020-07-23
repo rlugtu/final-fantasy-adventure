@@ -19,9 +19,12 @@ const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15
 sixHeadDragon.url = './images/monster-1.png '
 const snakeBlades =new Enemy('Snake Blades', 10, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
 snakeBlades.url = './images/snakeBlades.png'
-const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,50], [10,10,10,15,15,25,25,50,100])
+const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,40], [10,10,10,15,15,25,25,50,100])
 skulls.url = './images/skulls.png'
-
+const hornDemon = new Enemy('Horn Demon', 50, [15,15,15,20,20,30,35,50,50], [20,20,30,30,40,50,70,150])
+hornDemon.url = './images/hornDemon.png'
+const cactuar = new Enemy('Cactuar', 100, [20,20,20,30,30,40,50,70], [0])
+cactuar.url = './images/cactuar.png'
 // CLOUD
 const cloud = {
     name: 'Cloud',
@@ -186,15 +189,18 @@ window.addEventListener("keydown", (e) => {
     }
 });
 
+// MONSTERS ON MAP 
 const sixHeadDragonMapIcon = document.querySelector('#sixHeadedDragon')
 const snakeBladesMapIcon = document.querySelector('#snakeBlades')
 const skullsMapIcon = document.querySelector('#skulls')
+const hornDemonIcon = document.querySelector('#hornDemon')
+const cactuarIcon = document.querySelector('#cactuar')
+// Trigger Battle with monsters event listeners
 sixHeadDragonMapIcon.addEventListener('click', () => {
     fight(sixHeadDragon)
     switchToBattle()
     return
-}
-)
+})
 snakeBladesMapIcon.addEventListener('click', () => {
     fight(snakeBlades)
     switchToBattle()
@@ -205,7 +211,16 @@ skullsMapIcon.addEventListener('click', () => {
     switchToBattle()
     return
 })
-
+hornDemonIcon.addEventListener('click', () => {
+    fight(hornDemon)
+    switchToBattle()
+    return
+})
+cactuarIcon.addEventListener('click', () => {
+    fight(cactuar)
+    switchToBattle()
+    return
+})
 // MAP HEALTH AND INVENTORY UPDATES 
 let mapHealth = document.querySelector('#playerHealthMap')
 mapHealth.innerText = `Health: ${cloud.health}`
