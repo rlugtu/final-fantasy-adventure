@@ -235,6 +235,30 @@ cactuarIcon.addEventListener('click', () => {
         return
     },1000)
 })
+
+// SHOP ON MAP
+const shop1 = document.querySelector('#shop1')
+const shop2 = document.querySelector('#shop2')
+shop1.addEventListener('click', () => {
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let shopAsk = confirm('Would you like to enter the shop?' )
+        if(shopAsk) {
+            switchToShop()
+        }
+        return
+    },1000)
+})
+shop2.addEventListener('click', () => {
+    mapScreen.addEventListener('click',targetPosition)
+    setTimeout(function() {
+        let shopAsk = confirm('Would you like to enter the shop?' )
+        if(shopAsk) {
+            switchToShop()
+        }
+        return
+    },1000)
+})
 // MAP HEALTH AND INVENTORY UPDATES 
 let mapHealth = document.querySelector('#playerHealthMap')
 mapHealth.innerText = `Health: ${cloud.health}`
