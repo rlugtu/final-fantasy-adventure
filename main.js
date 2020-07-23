@@ -237,6 +237,7 @@ let potionHealFunc = () => {
         console.log(cloud.health) 
         cloud.potion--
         updateMapHealth()
+        updateMapInventory()
         hideItems()
     }
     else {
@@ -253,6 +254,7 @@ let hiPotionHealFunc = () => {
         cloud.hiPotion--
         updateMapHealth()
         console.log(cloud.health) 
+        updateMapInventory()
         hideItems()
     }
     else {
@@ -269,6 +271,7 @@ let megaPotionHealFunc = () => {
         cloud.megaPotion--
         updateMapHealth()
         console.log(cloud.health) 
+        updateMapInventory()
         hideItems()
     }
     else {
