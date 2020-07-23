@@ -17,7 +17,7 @@ class Enemy {
 } 
 const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15,50])
 sixHeadDragon.url = './images/monster-1.png '
-const snakeBlades =new Enemy('Snake Blades', 10, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
+const snakeBlades =new Enemy('Snake Blades', 5, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
 snakeBlades.url = './images/snakeBlades.png'
 const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,40], [10,10,10,15,15,25,25,50,100])
 skulls.url = './images/skulls.png'
@@ -328,71 +328,66 @@ const loseCondition = (player) => {
     return
 }
 
-// ENEMY ATTACK ANIMATION
-let enemyAttack = document.querySelector('.enemy-animation')
-let enemyAttackAnimation = () => {
+
+// CHANGE PLAYER
+let switchPlayer = (player) => {
+    if(player === 'cloud') {
+        currentPlayer = 'enemy'
+    }
+    else {
+        currentPlayer ='cloud'
+    }
+    console.log(currentPlayer)
+    return
+}
+
+
+
+// CLOUD ATTACK ANIMATION 
+// SLASH ANIMATION
+let cloudSlashAnimation = () => {
     setTimeout(function() {
-        enemyAttack.classList.remove('attack-off')
+        attackAnimation.classList.remove('attack-off')
     }, 1000)
     
     setTimeout(function() {
-        enemyAttack.classList.add('attack-off')
+        attackAnimation.classList.add('attack-off')
     }, 3000) 
 }
-
-// attack button
-const attackButton = document.querySelector('#attack')
-// attack animation class
-const attackAnimation = document.querySelector('.attack-animation')
-const attack = (enemy) => {
-    attackButton.addEventListener('click', () => {
-        setTimeout(function() {
-            attackAnimation.classList.remove('attack-off')
-        }, 1000)
-        
-        setTimeout(function() {
-            attackAnimation.classList.add('attack-off')
-        }, 3000) 
-        let playerIcon = document.querySelector('.player-icon')
+// MOVE ATTACK ANIMATION
+let cloudMoveAnimation = () => {
+    let playerIcon = document.querySelector('.player-icon')
         setTimeout(function() {
             playerIcon.classList.add('attackMove')
         },300)
         setTimeout(function() {
             playerIcon.classList.remove('attackMove')
         },1300)
-        loseCondition(cloud)
+}
+// CLOUD DAMAGE DEAL FUNC
+// attack button
+const attackButton = document.querySelector('#attack')
+// attack animation class
+const attackAnimation = document.querySelector('.attack-animation')
+const attack = (enemy) => {
+    attackButton.addEventListener('click', () => {
+        cloudSlashAnimation() 
+        cloudMoveAnimation()
         // ATTACK PART
         let damageDone = cloud.cloudAttack()
         actionsDialogue.innerText = `You dealt ${damageDone} damage!`
         // subtract from enemy hp
         enemy.health -= damageDone
         enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
-        //check for win
-        winCondition(enemy)
         // if the enemy isnt dead let them attack
-        if(winCondition(enemy) === false ) {
-            // ENEMY TURN
-            //enemy move animation
-            let enemyIcon = document.querySelector('.enemy-icon')
-            // ENEMY ATTACK ANIMATION
-            setTimeout(enemyAttackAnimation,4500)
-            setTimeout(function() {
-                enemyIcon.classList.add('enemyAttack')
-            },4500)
-            setTimeout(function() {
-                enemyIcon.classList.remove('enemyAttack')
-            },5500)
-            //enemy attack
-            setTimeout(function() {
-                let damageTaken = enemyTurn(enemy)
-                actionsDialogue.innerText = `You took ${damageTaken} damage!`
-                playerHealth.innerText = `Health: ${cloud.health}`
-            },5500)
+        winCondition(enemy)
+        if(winCondition(enemy) != true) {
+            enemyTurn(enemy)
         }
-            
     })
     return
 }
+
 
 
 // item button
@@ -429,7 +424,9 @@ let battlePotion = document.querySelector('#battlePotion')
 let battleHiPotion = document.querySelector('#battleHiPotion')
 let battleMegaPotion = document.querySelector('#battleMegaPotion')
 
-battlePotion.addEventListener('click', potionHealFunc) 
+battlePotion.addEventListener('click', () => {
+    potionHealFunc()
+}) 
 battleHiPotion.addEventListener('click', hiPotionHealFunc)
 battleMegaPotion.addEventListener('click',megaPotionHealFunc)
 
@@ -468,21 +465,8 @@ const steal = (enemy) => {
         battleMoney.innerText = `Gil: ${cloud.money}`
         
         // ENEMY TURN
-        //enemy move animation
-        let enemyIcon = document.querySelector('.enemy-icon')
-        setTimeout(function() {
-            enemyIcon.classList.add('enemyAttack')
-        },4500)
-        setTimeout(function() {
-            enemyIcon.classList.remove('enemyAttack')
-        },5500)
-        //enemy attack
-        setTimeout(function() {
-            let damageTaken = enemyTurn(enemy)
-            actionsDialogue.innerText = `You took ${damageTaken} damage!`
-            playerHealth.innerText = `Health: ${cloud.health}`
-        },5500)
-        
+        enemyTurn(enemy)
+        return
     })
     return
 }
@@ -490,7 +474,7 @@ const steal = (enemy) => {
 
 // run button
 const runOption = document.querySelector('#run')
-const run = () => {
+const run = (enemy) => {
     runOption.addEventListener('click', () => {
         let playerIcon = document.querySelector('.player-icon')
         setTimeout(function() {
@@ -500,29 +484,78 @@ const run = () => {
             playerIcon.classList.remove('run')
         },4000)
         setTimeout(switchToMap,3500)
+        // ACTUAL enemy attack 
+        setTimeout(enemyMoveAttackAnimation,1000)
+        setTimeout(enemyAttackAnimation,1500)
+        setTimeout(function() {
+            let damageTaken = enemy.enemyAttack()
+            actionsDialogue.innerText = `You took ${damageTaken} damage!`
+            cloud.health -= damageTaken
+            playerHealth.innerText = `Health: ${cloud.health}`
+        },500)
+        return 
     })
-    return
+    return 
 }
-
 
 
 
 // fight sequence
-const playerOptions = (enemy) => {
+
+
+const playerTurn = (enemy) => {
     // creates event listeners for battle options
     attack(enemy)
     items()
     steal(enemy)
-    run()
+    run(enemy)
     return
+}
+
+// ENEMY ATTACK ANIMATION
+let enemyAttack = document.querySelector('.enemy-animation')
+// SLASH
+let enemyAttackAnimation = () => {
+    enemyAttack.classList.remove('attack-off')
+    setTimeout(function() {
+        enemyAttack.classList.add('attack-off')
+    }, 3000) 
+}
+let enemyMoveAttackAnimation = () => {
+    enemyIcon.classList.add('enemyAttack')
+    
+    setTimeout(function() {
+        enemyIcon.classList.remove('enemyAttack')
+    },2000)
 }
 // enemy attack Function
 const enemyTurn = (enemy) => {
-    let damageTaken = enemy.enemyAttack()
-    cloud.health -= damageTaken
-    return damageTaken
+        // ENEMY TURN
+        //enemy move animation
+        let enemyIcon = document.querySelector('.enemy-icon')
+        // ENEMY ATTACK ANIMATION
+        setTimeout(enemyMoveAttackAnimation,4000)
+        setTimeout(enemyAttackAnimation,5000)
+        // ACTUAL enemy attack 
+        setTimeout(function() {
+            let damageTaken = enemy.enemyAttack()
+            actionsDialogue.innerText = `You took ${damageTaken} damage!`
+            cloud.health -= damageTaken
+            playerHealth.innerText = `Health: ${cloud.health}`
+        },5500)
+    return 
 }
+
 let enemyIcon = document.querySelector('.enemy-icon')
+
+
+
+let currentPlayer = 'cloud'
+
+
+
+let test = 0
+
 //FIGHT FUNCTION
 const fight = (enemy) => {
     // reset enemy health everytime new fight is initiated 
@@ -531,9 +564,10 @@ const fight = (enemy) => {
      // change the Enemy Icon based on Monster
     enemyIcon.style.backgroundImage = `url('${enemy.url}')`
     enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
+    // Clouds current health
     playerHealth.innerText = `Health: ${cloud.health}`
     //activate Event Listeners
-    playerOptions(enemy)
-   return
+   playerTurn(enemy)
 }
+    
 

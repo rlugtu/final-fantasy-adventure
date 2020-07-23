@@ -517,6 +517,7 @@ padding-left: 5px;
 }
 /* TOGGLE FOR ACTIVE WINDOW */
 .inactive {
+    animation: fade 1s;
     display: none;
 }
 
@@ -629,5 +630,14 @@ padding-left: 5px;
     100%{
         transform: scale(1) translateY(0) translateX(0) rotate(0);
 
+    }
+}
+
+@keyframes fade {
+    0%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0;
     }
 }
