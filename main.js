@@ -222,6 +222,61 @@ const updateMapInventory = () => {
     
 }
 
+// USING POTIONS IN MAP 
+let potionHealFunc = () => {
+    if(cloud.potion > 0) {
+        console.log(cloud.health)
+        healAnimation()
+        cloud.health += potionHeals.potion
+        actionsDialogue.innerText = `You Healed ${potionHeals.potion} HP!`   
+        playerHealth.innerText = `Health: ${cloud.health}`    
+        console.log(cloud.health) 
+        cloud.potion--
+        updateMapHealth()
+        hideItems()
+    }
+    else {
+        alert('You dont have Potions!')
+    }
+}
+let hiPotionHealFunc = () => {
+    if(cloud.hiPotion > 0) {
+        console.log(cloud.health)
+        healAnimation()
+        cloud.health += potionHeals.hiPotion
+        actionsDialogue.innerText = `You Healed ${potionHeals.hiPotion} HP!`
+        playerHealth.innerText = `Health: ${cloud.health}`            
+        cloud.hiPotion--
+        updateMapHealth()
+        console.log(cloud.health) 
+        hideItems()
+    }
+    else {
+        alert('You dont have Hi-Potions!')
+    }
+}
+let megaPotionHealFunc = () => {
+    if(cloud.megaPotion > 0) {
+        console.log(cloud.health)
+        healAnimation()
+        cloud.health += potionHeals.megaPotion
+        actionsDialogue.innerText = `You Healed ${potionHeals.megaPotion} HP!`
+        playerHealth.innerText = `Health: ${cloud.health}`            
+        cloud.megaPotion--
+        updateMapHealth()
+        console.log(cloud.health) 
+        hideItems()
+    }
+    else {
+        alert('You dont have Mega Potions!')
+    }
+}
+
+mapPotion.addEventListener('click',potionHealFunc)
+mapHiPotion.addEventListener('click',hiPotionHealFunc)
+mapMegaPotion.addEventListener('click',megaPotionHealFunc)
+
+
 
 
 // Battle SYSTEM + event listeners
@@ -351,51 +406,10 @@ let healFunc = (potionHeals) => {
 let battlePotion = document.querySelector('#battlePotion') 
 let battleHiPotion = document.querySelector('#battleHiPotion')
 let battleMegaPotion = document.querySelector('#battleMegaPotion')
-battlePotion.addEventListener('click', () => {
-    if(cloud.potion > 0) {
-        console.log(cloud.health)
-        healAnimation()
-        cloud.health += potionHeals.potion
-        actionsDialogue.innerText = `You Healed ${potionHeals.potion} HP!`   
-        playerHealth.innerText = `Health: ${cloud.health}`    
-        console.log(cloud.health) 
-        cloud.potion--
-        hideItems()
-    }
-    else {
-        alert('You dont have Potions!')
-    }
-}) 
-battleHiPotion.addEventListener('click', () => {
-    if(cloud.hiPotion > 0) {
-        console.log(cloud.health)
-        healAnimation()
-        cloud.health += potionHeals.hiPotion
-        actionsDialogue.innerText = `You Healed ${potionHeals.hiPotion} HP!`
-        playerHealth.innerText = `Health: ${cloud.health}`            
-        cloud.hiPotion--
-        console.log(cloud.health) 
-        hideItems()
-    }
-    else {
-        alert('You dont have Hi-Potions!')
-    }
-})
-battleMegaPotion.addEventListener('click', () => {
-    if(cloud.megaPotion > 0) {
-        console.log(cloud.health)
-        healAnimation()
-        cloud.health += potionHeals.megaPotion
-        actionsDialogue.innerText = `You Healed ${potionHeals.megaPotion} HP!`
-        playerHealth.innerText = `Health: ${cloud.health}`            
-        cloud.megaPotion--
-        console.log(cloud.health) 
-        hideItems()
-    }
-    else {
-        alert('You dont have Mega Potions!')
-    }
-})
+
+battlePotion.addEventListener('click', potionHealFunc) 
+battleHiPotion.addEventListener('click', hiPotionHealFunc)
+battleMegaPotion.addEventListener('click',megaPotionHealFunc)
 
 
 
