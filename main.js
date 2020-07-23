@@ -74,6 +74,9 @@ const switchToBattle = () => {
 }
 
 const switchToShop = () => {
+    shopPotion.innerText = `Potion ${cloud.potion}`
+    hiPotion.innerText = `Hi-Potion ${cloud.hiPotion}`
+    megaPotion.innerText = `MegaPotion ${cloud.megaPotion}`
     startScreen.classList.add('inactive')
     updateShopMoney()
     mapScreen.classList.add('inactive')
@@ -107,6 +110,7 @@ const potionHeals = {
     hiPotion: 20,
     megaPotion: 40,
 }
+
 let shopPotion = document.querySelector('.potion')
 let hiPotion = document.querySelector('.hiPotion')
 let megaPotion = document.querySelector('.megaPotion')
