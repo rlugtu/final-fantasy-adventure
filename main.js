@@ -92,6 +92,7 @@ const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
 const switchToMap = () => {
+    mainMenuSound.pause()
     mapMusic.play()
     shopMusic.pause()
     battleMusic.pause()
