@@ -49,6 +49,23 @@ const cloud = {
     } 
 }
 
+// SOUNDS
+let mainMenuSound = new Audio('./sounds/mainMenuSound.mp3')
+window.onload = mainMenuSound.play()
+
+let winSound = new Audio('./sounds/battleWin.mp3')
+let buttonSound = new Audio('./sounds/buttonSound.mp3')
+let sound = document.querySelectorAll('.sound')
+sound.forEach(button => {
+    button.addEventListener('mouseover', (e) => {
+        buttonSound.play();
+    })
+    button.addEventListener('mouseout', (e) => {
+        buttonSound.pause();
+        buttonSound.currentTime = 0;
+    })
+})
+
 
 // SCREEN TOGGLES 
 const mapScreen = document.querySelector(".map")
@@ -98,7 +115,10 @@ const switchToShop = () => {
 
 //START BUTTON && START OVER 
 const startButton = document.querySelector('#startButton')
-startButton.addEventListener('click', switchToMap)
+startButton.addEventListener('click', () => {
+    mainMenuSound.pause()
+    switchToMap()
+})
 const startOver = document.querySelector('#startOver')
 startOver.addEventListener('click', () => {
     location.reload();
