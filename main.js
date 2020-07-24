@@ -85,9 +85,9 @@ const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
 //play music on load
-startScreen.addEventListener('mouseover', () => {
-    mainMenuSound.play()
-})
+// startScreen.addEventListener('click', () => {
+//     mainMenuSound.play()
+// })
 // startScreen.addEventListener('click', () => {
 //     mainMenuSound.play()
 // })
@@ -270,7 +270,7 @@ snakeBladesMapIcon.addEventListener('click', () => {
             }
         }
         else {
-            alert('You have not yet earned the right to fight Cactuar')
+            alert('You have not yet earned the right to fight SnakeBlades')
         }
         return
     },1000)
@@ -285,7 +285,7 @@ skullsMapIcon.addEventListener('click', () => {
             }
         }
         else {
-            alert('You have not yet earned the right to fight Cactuar')
+            alert('You have not yet earned the right to fight Skulls')
         }
         return
     },1000)
@@ -301,7 +301,7 @@ hornDemonIcon.addEventListener('click', () => {
             }
         }
         else {
-            alert('You have not yet earned the right to fight Cactuar')
+            alert('You have not yet earned the right to fight Horn Demon')
         }
         return
     },1000)
@@ -664,6 +664,13 @@ let enemyMoveAttackAnimation = () => {
 }
 // enemy attack Function
 const enemyTurn = (enemy) => {
+        // HIDE PLAYER OPTIONS
+        setTimeout(function() {
+            allOptions.classList.add('off')
+        },500)
+        setTimeout(function() {
+            allOptions.classList.remove('off')
+        },6000)
         // ENEMY TURN
         //enemy move animation
         let enemyIcon = document.querySelector('.enemy-icon')
