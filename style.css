@@ -64,12 +64,11 @@ body {
 }
 
 .player-icon-map {
-    position: absolute;
     width: 100px;
     height: 80px;
     background-image:url("./images/player-icon.png");
     background-repeat: no-repeat;
-    transform: translate3d(0px,0px, 0);
+    transform: translate3d(200px,500px, 0);
     transition: transform 1s linear;
 }
 #playerHealthMap {

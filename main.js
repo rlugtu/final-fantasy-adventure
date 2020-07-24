@@ -5,7 +5,8 @@ class Enemy {
         this.health = health;
         this.attack = attack;
         this.money = money;
-        this.maxHealth = health
+        this.maxHealth = health;
+        this.hasWon = false
     }
     enemyAttack() {
         // return a random number from the range of damages the monster can make
@@ -58,6 +59,11 @@ const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
 const switchToMap = () => {
+    testDelete()
+    if(cactuar.hasWon) {
+        alert('YOU WON!')
+        location.reload()
+    }
     startScreen.classList.add('inactive')
     mapScreen.classList.remove('inactive')
     battleScreen.classList.add('inactive')
@@ -185,6 +191,9 @@ let targetPosition = (e) => {
     playerIconMap.style.transform = value
 }
 mapScreen.addEventListener('click',targetPosition)
+
+
+
 
 // MONSTERS ON MAP 
 const sixHeadDragonMapIcon = document.querySelector('#sixHeadedDragon')
@@ -365,6 +374,7 @@ const winCondition = (enemy) => {
     if(enemy.health <= 0) {
         actionsDialogue.innerText = `You defeated the ${enemy.name}!`
         mapHealth.innerText = `Health: ${cloud.health}`
+        enemy.hasWon = true
         return true
     }
     return false
@@ -380,7 +390,6 @@ const loseCondition = (player) => {
     }
     return
 }
-
 
 // CHANGE PLAYER
 let switchPlayer = (player) => {
@@ -551,7 +560,9 @@ const run = (enemy) => {
     return 
 }
 
-
+const beatenEnemmies = {
+    sixHeadDragon: false
+}
 
 // fight sequence
 
@@ -607,13 +618,9 @@ let enemyIcon = document.querySelector('.enemy-icon')
 let currentPlayer = 'cloud'
 
 
-
-let test = 0
-
 //FIGHT FUNCTION
 const fight = (enemy) => {
     // reset enemy health everytime new fight is initiated 
-    enemy.health = enemy.maxHealth
     actionsDialogue.innerText = ''
      // change the Enemy Icon based on Monster
     enemyIcon.style.backgroundImage = `url('${enemy.url}')`
@@ -622,6 +629,25 @@ const fight = (enemy) => {
     playerHealth.innerText = `Health: ${cloud.health}`
     //activate Event Listeners
    playerTurn(enemy)
+   
 }
-    
+
+let testDelete = () => {
+    if(sixHeadDragon.hasWon) {
+        sixHeadDragonMapIcon.remove()
+    }
+    if(snakeBlades.hasWon) {
+        snakeBladesMapIcon.remove()
+    }
+    if(hornDemon.hasWon) {
+        hornDemonIcon.remove()
+    }
+    if(skulls.hasWon) {
+        skullsMapIcon.remove()
+    }
+    if(cactuar.hasWon) {
+        cactuarIcon.remove()
+    }
+    return
+}
 
