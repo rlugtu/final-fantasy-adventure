@@ -214,21 +214,30 @@ sixHeadDragonMapIcon.addEventListener('click', () => {
 })
 snakeBladesMapIcon.addEventListener('click', () => {
     setTimeout(function() {
-        let battleAsk = confirm('Would You like to fight SnakeBlades?' )
-        if(battleAsk) {
-        
-            switchToBattle()
-            fight(snakeBlades)
+        if(sixHeadDragon.hasWon) {
+            let battleAsk = confirm('Would You like to fight SnakeBlades?' )
+            if(battleAsk) {
+                switchToBattle()
+                fight(snakeBlades)
+            }
+        }
+        else {
+            alert('You have not yet earned the right to fight Cactuar')
         }
         return
     },1000)
 })
 skullsMapIcon.addEventListener('click', () => {
     setTimeout(function() {
-        let battleAsk = confirm('Would You like to fight Skulls?' )
-        if(battleAsk) {
-            switchToBattle()
-            fight(skulls)
+        if(snakeBlades.hasWon) {
+            let battleAsk = confirm('Would You like to fight Skulls?' )
+            if(battleAsk) {
+                switchToBattle()
+                fight(skulls)
+            }
+        }
+        else {
+            alert('You have not yet earned the right to fight Cactuar')
         }
         return
     },1000)
@@ -236,17 +245,22 @@ skullsMapIcon.addEventListener('click', () => {
 hornDemonIcon.addEventListener('click', () => {
     mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
-        let battleAsk = confirm('Would You like to fight the Horn Demon?' )
-        if(battleAsk) {
-            switchToBattle()
-            fight(hornDemon)
+        if(skulls.hasWon) {
+            let battleAsk = confirm('Would You like to fight the Horn Demon?' )
+            if(battleAsk) {
+                switchToBattle()
+                fight(hornDemon)
+            }
+        }
+        else {
+            alert('You have not yet earned the right to fight Cactuar')
         }
         return
     },1000)
 })
 cactuarIcon.addEventListener('click', () => {
     setTimeout(function() {
-        if(winCondition(sixHeadDragon)) {
+        if(hornDemon.hasWon) {
             let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
             if(battleAsk) {
             switchToBattle()
