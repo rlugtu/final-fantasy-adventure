@@ -51,10 +51,12 @@ const cloud = {
 
 // SOUNDS
 let mainMenuSound = new Audio('./sounds/mainMenuSound.mp3')
-window.onload = mainMenuSound.play()
-
+let battleMusic = new Audio('./sounds/battleMusic.mp3')
 let winSound = new Audio('./sounds/battleWin.mp3')
 let buttonSound = new Audio('./sounds/buttonSound.mp3')
+let shopMusic = new Audio('./sounds/shopMusic.mp3')
+let mapMusic = new Audio('./sounds/mapMusic.mp3')
+
 let sound = document.querySelectorAll('.sound')
 sound.forEach(button => {
     button.addEventListener('mouseover', (e) => {
@@ -72,11 +74,15 @@ const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
-
+//play music on load
+document.onload = mainMenuSound.play()
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
 const switchToMap = () => {
+    mapMusic.play()
+    shopMusic.pause()
+    battleMusic.pause()
     testDelete()
     if(cactuar.hasWon) {
         alert('YOU WON!')
@@ -92,6 +98,10 @@ const switchToMap = () => {
 }
 
 const switchToBattle = () => {
+    mapMusic.pause()
+    shopMusic.pause()
+    battleMusic.currentTime = 0;
+    battleMusic.play()
     battleMoney.innerText = `Gil: ${cloud.money}`
     startScreen.classList.add('inactive')
     mapScreen.classList.add('inactive')
@@ -102,6 +112,9 @@ const switchToBattle = () => {
 }
 
 const switchToShop = () => {
+    shopMusic.play()
+    mapMusic.pause()
+    battleMusic.pause()
     shopPotion.innerText = `Potion ${cloud.potion}`
     hiPotion.innerText = `Hi-Potion ${cloud.hiPotion}`
     megaPotion.innerText = `MegaPotion ${cloud.megaPotion}`
