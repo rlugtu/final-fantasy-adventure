@@ -184,13 +184,12 @@ const updateShopMoney = () => {
 // MOVING CHARACTER
 const playerIconMap = document.querySelector('.player-icon-map')
 let targetPosition = (e) => {
-    let relative = e.target.getBoundingClientRect()
-    let xPosition = e.clientX - relative.left;
-    let yPosition = e.clientY - relative.top;
+    let xPosition = e.clientX - mapScreen.getBoundingClientRect().left
+    let yPosition = e.clientY - mapScreen.getBoundingClientRect().top
     let value = "translate3d(" + xPosition + "px, " + yPosition + "px, 0)";
     playerIconMap.style.transform = value
 }
-mapScreen.addEventListener('click',targetPosition)
+mapScreen.addEventListener('click',targetPosition, false)
 
 
 
