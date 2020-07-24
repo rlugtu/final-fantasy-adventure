@@ -178,9 +178,9 @@ const updateShopMoney = () => {
 // MOVING CHARACTER
 const playerIconMap = document.querySelector('.player-icon-map')
 let targetPosition = (e) => {
-    let xPosition = e.clientX - 70;
-    let yPosition = e.clientY - 170;
-
+    let relative = e.target.getBoundingClientRect()
+    let xPosition = e.clientX - relative.left;
+    let yPosition = e.clientY - relative.top;
     let value = "translate3d(" + xPosition + "px, " + yPosition + "px, 0)";
     playerIconMap.style.transform = value
 }
@@ -194,7 +194,6 @@ const hornDemonIcon = document.querySelector('#hornDemon')
 const cactuarIcon = document.querySelector('#cactuar')
 // Trigger Battle with monsters event listeners
 sixHeadDragonMapIcon.addEventListener('click', () => {
-    mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
         let battleAsk = confirm('Would You like to fight the Six Headed Dragon?' )
         if(battleAsk) {
@@ -205,7 +204,6 @@ sixHeadDragonMapIcon.addEventListener('click', () => {
     },1000)
 })
 snakeBladesMapIcon.addEventListener('click', () => {
-    mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
         let battleAsk = confirm('Would You like to fight SnakeBlades?' )
         if(battleAsk) {
@@ -217,7 +215,6 @@ snakeBladesMapIcon.addEventListener('click', () => {
     },1000)
 })
 skullsMapIcon.addEventListener('click', () => {
-    mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
         let battleAsk = confirm('Would You like to fight Skulls?' )
         if(battleAsk) {
@@ -239,7 +236,6 @@ hornDemonIcon.addEventListener('click', () => {
     },1000)
 })
 cactuarIcon.addEventListener('click', () => {
-    mapScreen.addEventListener('click',targetPosition)
     setTimeout(function() {
         if(winCondition(sixHeadDragon)) {
             let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )

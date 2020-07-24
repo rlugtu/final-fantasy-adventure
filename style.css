@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    padding: 0;
     background-color: rgba(139, 127, 109)
 }
 .container {
@@ -55,6 +56,7 @@ body {
     display: flex;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     background-color: black;
     background-image: url("./images/map.jpg");
     background-size: 100%;
@@ -62,12 +64,12 @@ body {
 }
 
 .player-icon-map {
+    position: absolute;
     width: 100px;
     height: 80px;
     background-image:url("./images/player-icon.png");
     background-repeat: no-repeat;
-    background-size: 70%;
-    transform: translate3d(170px,520px, 0);
+    transform: translate3d(0px,0px, 0);
     transition: transform 1s linear;
 }
 #playerHealthMap {
@@ -157,8 +159,8 @@ padding-left: 5px;
     position: absolute;
     width: 100px;
     height: 80px;
-    margin-top: 200px;
-    margin-left: 100px;
+    margin-left: 150px;
+    margin-top: 300px;
     background-image:url("./images/monster-1.png");
     background-repeat: no-repeat;
     background-size: 70%;
@@ -171,8 +173,8 @@ padding-left: 5px;
     position: absolute;
     width: 100px;
     height: 80px;
-    margin-top: 100px;
-    margin-left: 300px;
+    margin-left: 150px;
+    margin-top: 70px;
     background-image:url("./images/snakeBlades.png");
     background-repeat: no-repeat;
     background-size: 70%;
