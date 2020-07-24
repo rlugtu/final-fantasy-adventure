@@ -76,6 +76,7 @@ soundToggle.addEventListener('click', () => {
     mainMenuSound.pause()
     shopMusic.pause()
     mapMusic.pause()
+    battleMusic.pause()
 })
 
 
