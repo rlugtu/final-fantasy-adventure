@@ -1,11 +1,12 @@
 // ENEMIES
 class Enemy {
-    constructor(name, health, attack,money) {
+    constructor(name, health, attack,money,bounty) {
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.money = money;
         this.maxHealth = health;
+        this.bounty = bounty;
         this.hasWon = false
     }
     enemyAttack() {
@@ -16,15 +17,15 @@ class Enemy {
         this.health = this.maxHealth
     }
 } 
-const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15,50])
+const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15,50],30)
 sixHeadDragon.url = './images/monster-1.png '
-const snakeBlades =new Enemy('Snake Blades', 5, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80])
+const snakeBlades =new Enemy('Snake Blades', 5, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80],50)
 snakeBlades.url = './images/snakeBlades.png'
-const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,40], [10,10,10,15,15,25,25,50,100])
+const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,40], [10,10,10,15,15,25,25,50,100],80)
 skulls.url = './images/skulls.png'
-const hornDemon = new Enemy('Horn Demon', 50, [15,15,15,20,20,30,35,50,50], [20,20,30,30,40,50,70,150])
+const hornDemon = new Enemy('Horn Demon', 50, [15,15,15,20,20,30,35,50,50], [20,20,30,30,40,50,70,150],100)
 hornDemon.url = './images/hornDemon.png'
-const cactuar = new Enemy('Cactuar', 100, [20,20,20,30,30,40,50,70], [0])
+const cactuar = new Enemy('Cactuar', 100, [20,20,20,30,30,40,50,70], [0],0)
 cactuar.url = './images/cactuar.png'
 // CLOUD
 const cloud = {
@@ -35,7 +36,7 @@ const cloud = {
     potion: 1,
     hiPotion: 1,
     megaPotion: 1,
-    currentWeapon: 'Basic Sword',
+    hasBusterSword: false,
 
     cloudAttack() {
         return(this.attack[Math.floor(Math.random()*this.attack.length)])
@@ -162,8 +163,8 @@ megaPotion.addEventListener('click', () => {
 })
 busterSword.addEventListener('click', () => {
     if(itemsCost.busterSword < cloud.money) {
-        cloud.currentWeapon = 'busterSword'
-        cloud.attack = [10,,10,10,20,20,25,25,30,60,80]
+        cloud.hasBusterSword = true
+        cloud.attack = [10,10,10,20,20,25,25,30,60,80]
         busterSword.innerText = `BuserSword: 1`
     }
     else {
@@ -371,12 +372,17 @@ let playerHealth = document.querySelector('.playerHealth')
 // win condition
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
-        actionsDialogue.innerText = `You defeated the ${enemy.name}!`
+        console.log('hi')
+        actionsDialogue.innerText = `You defeated the ${enemy.name}! \n You earned ${enemy.bounty} Gil!`
         mapHealth.innerText = `Health: ${cloud.health}`
+        cloud.money += enemy.bounty
+        enemy.bounty = 0
         enemy.hasWon = true
         return true
     }
-    return false
+    else {
+        return false
+    }
 }
 // lost condition
 const loseCondition = (player) => {
@@ -442,9 +448,9 @@ const attack = (enemy) => {
         enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
         // if the enemy isnt dead let them attack
         winCondition(enemy)
-        if(winCondition(enemy) != true) {
-            enemyTurn(enemy)
-        }
+       if(enemy.health > 0) {
+           enemyTurn(enemy)
+       }
     })
     return
 }
@@ -559,9 +565,6 @@ const run = (enemy) => {
     return 
 }
 
-const beatenEnemmies = {
-    sixHeadDragon: false
-}
 
 // fight sequence
 
