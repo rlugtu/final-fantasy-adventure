@@ -84,10 +84,8 @@ const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
-//play music on load
-// startScreen.addEventListener('click', () => {
-//     mainMenuSound.play()
-// })
+// play music on load
+startScreen.onload = mainMenuSound.play()
 // startScreen.addEventListener('click', () => {
 //     mainMenuSound.play()
 // })
