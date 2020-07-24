@@ -85,7 +85,7 @@ const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
 //play music on load
-document.onload = mainMenuSound.play()
+window.onload = mainMenuSound.play()
 const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
