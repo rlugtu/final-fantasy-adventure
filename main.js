@@ -56,6 +56,9 @@ let winSound = new Audio('./sounds/battleWin.mp3')
 let buttonSound = new Audio('./sounds/buttonSound.mp3')
 let shopMusic = new Audio('./sounds/shopMusic.mp3')
 let mapMusic = new Audio('./sounds/mapMusic.mp3')
+let enemyDamageSound = new Audio('./sounds/enemyDamageSound.mp3')
+let healSound = new Audio('./sounds/healSound.mp3')
+let cloudAttackSound = new Audio('./sounds/cloudAttackSound.mp3')
 
 let sound = document.querySelectorAll('.sound')
 sound.forEach(button => {
@@ -66,6 +69,13 @@ sound.forEach(button => {
         buttonSound.pause();
         buttonSound.currentTime = 0;
     })
+})
+
+let soundToggle = document.querySelector('#soundToggle')
+soundToggle.addEventListener('click', () => {
+    mainMenuSound.pause()
+    shopMusic.pause()
+    mapMusic.pause()
 })
 
 
@@ -460,16 +470,21 @@ let switchPlayer = (player) => {
 // CLOUD ATTACK ANIMATION 
 // SLASH ANIMATION
 let cloudSlashAnimation = () => {
+    
     setTimeout(function() {
         attackAnimation.classList.remove('attack-off')
+        cloudAttackSound.play()
     }, 1000)
-    
+    setTimeout(function() {
+        cloudAttackSound.play()
+    },2000)
     setTimeout(function() {
         attackAnimation.classList.add('attack-off')
     }, 3000) 
 }
 // MOVE ATTACK ANIMATION
 let cloudMoveAnimation = () => {
+   
     let playerIcon = document.querySelector('.player-icon')
         setTimeout(function() {
             playerIcon.classList.add('attackMove')
@@ -549,6 +564,7 @@ battleMegaPotion.addEventListener('click',megaPotionHealFunc)
 // HEAL ANIMATION
 const healAnimation = () => {
     let healAnimation = document.querySelector('.heal-animation')
+        healSound.play()
         setTimeout(function() {
             healAnimation.classList.remove('heal-off')
         }, 500)
@@ -648,6 +664,9 @@ const enemyTurn = (enemy) => {
         let enemyIcon = document.querySelector('.enemy-icon')
         // ENEMY ATTACK ANIMATION
         setTimeout(enemyMoveAttackAnimation,4000)
+        setTimeout(function() {
+            enemyDamageSound.play()
+        },5000)
         setTimeout(enemyAttackAnimation,5000)
         // ACTUAL enemy attack 
         setTimeout(function() {
