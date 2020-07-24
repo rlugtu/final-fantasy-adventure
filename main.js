@@ -86,7 +86,9 @@ const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
 // play music on load
-startScreen.onload = mainMenuSound.play()
+startScreen.addEventListener('mouseover', () => {
+    mainMenuSound.play()
+})
 // startScreen.addEventListener('click', () => {
 //     mainMenuSound.play()
 // })
@@ -94,6 +96,7 @@ const mapToggle = document.querySelector("#map-toggle")
 const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
 const switchToMap = () => {
+    mainMenuSound.pause()
     mapMusic.play()
     shopMusic.pause()
     battleMusic.pause()
@@ -143,7 +146,6 @@ const switchToShop = () => {
 //START BUTTON && START OVER 
 const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', () => {
-    mainMenuSound.pause()
     switchToMap()
 })
 const startOver = document.querySelector('#startOver')
