@@ -102,7 +102,6 @@ startScreen.addEventListener('mouseover', () => {
 //     mainMenuSound.play()
 // })
 const mapToggle = document.querySelector("#map-toggle")
-const battleToggle = document.querySelector('#battle-toggle')
 const shopToggle = document.querySelector('#shop-toggle')
 const switchToMap = () => {
     mainMenuSound.pause()
@@ -164,8 +163,6 @@ startOver.addEventListener('click', () => {
 
 // BUTTONS JUST FOR TESTING
 mapToggle.addEventListener('click', switchToMap)
-battleToggle.addEventListener('click', switchToBattle)
-shopToggle.addEventListener('click', switchToShop)
 
 
 // SHOP OPTIONS AND EVENT LISTENERS
@@ -470,7 +467,7 @@ let playerHealth = document.querySelector('.playerHealth')
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
         console.log('hi')
-        actionsDialogue.innerText = `You defeated the ${enemy.name}! \n You earned ${enemy.bounty} Gil!`
+        actionsDialogue.innerText = `You defeated the ${enemy.name}! \n You earned ${enemy.bounty} Gil! \n Head back to the Map.`
         mapHealth.innerText = `Health: ${cloud.health}`
         cloud.money += enemy.bounty
         enemy.bounty = 0
