@@ -28,13 +28,6 @@
                 <div id="hornDemon"></div>
                 <div id="cactuar"></div>
                 <div id = "playerHealthMap"></div>
-                <div id = "mapInventory">
-                    <ul>
-                        <li class ="mapPotion">Potion</li>
-                        <li class ="mapHiPotion">Hi-Potion</li>
-                        <li class ="mapMegaPotion">Mega Potion</li>
-                    </ul>
-                </div>
             </div>
             <div class="battle-screen inactive">
                 <div class="dialogueBox">
@@ -88,10 +81,32 @@
                     </div>
                 </div>
             </div>
+            <div class="playerInventory inactive">
+                <div class="inventoryIcon"></div>
+                <div id = "cloudInventory">
+                    <ul>
+                        <h1>Cloud</h1>
+                        <li class="inventoryHealth">Health</li>
+                        <li class="inventoryAttack">Attack</li>
+                        <li class="inventoryGil">Gil:</li>
+                        <li class="inventoryWeapon">Weapon</li>
+                    </ul>
+                </div>
+                <div id = "mapInventory">
+                    <ul>
+                        <h1>Inventory</h1>
+                        <li class ="mapPotion sound">Potion</li>
+                        <li class ="mapHiPotion sound">Hi-Potion</li>
+                        <li class ="mapMegaPotion sound">Mega Potion</li>
+                        <li class="inventoryBack sound">Back</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="toggle">
             <button id="startOver">Start Over</button>
             <button id="map-toggle">Map</button>
+            <button id="inventory-toggle">Inventory</button>
             <button id="soundToggle">Music</button>
         </div>
     </div>

@@ -18,9 +18,9 @@ class Enemy {
         this.health = this.maxHealth
     }
 } 
-const sixHeadDragon = new Enemy('6 Headed Dragon', 1, [1,2,3,4,5], [5,5,10,10,15,50],30)
+const sixHeadDragon = new Enemy('6 Headed Dragon', 5, [1,2,3,4,5], [5,5,10,10,15,50],30)
 sixHeadDragon.url = './images/monster-1.png '
-const snakeBlades =new Enemy('Snake Blades', 5, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80],50)
+const snakeBlades =new Enemy('Snake Blades', 10, [5,5,5,10,10,15,15,20,20,30], [5,5,5,10,10,10,20,20,30,80],50)
 snakeBlades.url = './images/snakeBlades.png'
 const skulls = new Enemy('Skulls', 30, [10,10,10,15,15,15,25,25,40], [10,10,10,15,15,25,25,50,100],80)
 skulls.url = './images/skulls.png'
@@ -38,6 +38,7 @@ const cloud = {
     hiPotion: 1,
     megaPotion: 1,
     hasBusterSword: false,
+    currentWeapon: 'Standard Sword',
 
     cloudAttack() {
         return(this.attack[Math.floor(Math.random()*this.attack.length)])
@@ -94,15 +95,17 @@ const mapScreen = document.querySelector(".map")
 const battleScreen = document.querySelector(".battle-screen")
 const shopScreen = document.querySelector(".shop")
 const startScreen = document.querySelector('.startScreen')
+const inventoryScreen = document.querySelector('.playerInventory')
+
 // play music on load
 startScreen.addEventListener('mouseover', () => {
     mainMenuSound.play()
 })
-// startScreen.addEventListener('click', () => {
-//     mainMenuSound.play()
-// })
+
+// SCREEN TOGGLES
 const mapToggle = document.querySelector("#map-toggle")
 const shopToggle = document.querySelector('#shop-toggle')
+const inventoryToggle = document.querySelector('#inventory-toggle')
 const switchToMap = () => {
     mainMenuSound.pause()
     mapMusic.play()
@@ -117,6 +120,7 @@ const switchToMap = () => {
     mapScreen.classList.remove('inactive')
     battleScreen.classList.add('inactive')
     shopScreen.classList.add('inactive')
+    inventoryScreen.classList.add('inactive')
     updateMapInventory()
     updateMapHealth()
     return
@@ -132,6 +136,8 @@ const switchToBattle = () => {
     mapScreen.classList.add('inactive')
     battleScreen.classList.remove('inactive')
     shopScreen.classList.add('inactive')
+    inventoryScreen.classList.add('inactive')
+
     
     return
 }
@@ -150,7 +156,36 @@ const switchToShop = () => {
     shopScreen.classList.remove('inactive')
     return
 }
+// CLOUD STATS IN INVENTORY
+let cloudHPInventory = document.querySelector('.inventoryHealth')
+let cloudAttackInventory = document.querySelector('.inventoryAttack')
+let cloudGilInventory = document.querySelector('.inventoryGil')
+let cloudWeaponInventory = document.querySelector('.inventoryWeapon')
 
+// UPDATE CLOUDS STATS INVENTORY
+const updateCloudInventoryStats = () => {
+    cloudHPInventory.innerText = `Health: ${cloud.health}`
+    cloudAttackInventory.innerText = `Attack: ${cloud.attack}`
+    cloudGilInventory.innerText = `Gil: ${cloud.money}`
+    cloudWeaponInventory.innerText = `Weapon: ${cloud.currentWeapon}`
+    return
+}
+const switchToInventory = () => {
+    updateMapInventory()
+    updateCloudInventoryStats()
+    shopMusic.play()
+    mapMusic.pause()
+    battleMusic.pause()
+    mainMenuSound.pause()
+    startScreen.classList.add('inactive')
+    mapScreen.classList.add('inactive')
+    battleScreen.classList.add('inactive')
+    shopScreen.classList.add('inactive')
+    inventoryScreen.classList.remove('inactive')
+}
+
+let inventoryBack = document.querySelector('.inventoryBack')
+inventoryBack.addEventListener('click', switchToMap)
 //START BUTTON && START OVER 
 const startButton = document.querySelector('#startButton')
 startButton.addEventListener('click', () => {
@@ -161,9 +196,9 @@ startOver.addEventListener('click', () => {
     location.reload();
 })
 
-// BUTTONS JUST FOR TESTING
+// SCREEN TOGGLES 
 mapToggle.addEventListener('click', switchToMap)
-
+inventoryToggle.addEventListener('click', switchToInventory)
 
 // SHOP OPTIONS AND EVENT LISTENERS
 const itemsCost = {
@@ -219,8 +254,9 @@ megaPotion.addEventListener('click', () => {
 busterSword.addEventListener('click', () => {
     if(itemsCost.busterSword < cloud.money) {
         cloud.hasBusterSword = true
+        cloud.currentWeapon = 'Buster Sword'
         cloud.attack = [10,10,10,20,20,25,25,30,60,80]
-        busterSword.innerText = `BuserSword: 1`
+        busterSword.innerText = `BusterSword: 1`
     }
     else {
         alert('not enough money')
@@ -234,6 +270,7 @@ const shopMoney = document.querySelector('.shopMoney')
 const updateShopMoney = () => {
     shopMoney.innerText = `Gil: ${cloud.money}`
 }
+
 
 
 // MAP EVENT LISTENERS
@@ -393,8 +430,6 @@ const updateMapInventory = () => {
     mapPotion.innerText = cloud.potion + ' ' + 'Potion'
     mapHiPotion.innerText = cloud.hiPotion + ' ' + 'Hi-Potion'
     mapMegaPotion.innerText = cloud.megaPotion + ' ' + 'MegaPotion'
-
-    
 }
 
 // USING POTIONS IN MAP 
@@ -410,6 +445,7 @@ let potionHealFunc = () => {
         updateMapHealth()
         updateMapInventory()
         hideItems()
+        updateCloudInventoryStats()
     }
     else {
         alert('You dont have Potions!')
@@ -427,6 +463,7 @@ let hiPotionHealFunc = () => {
         console.log(cloud.health) 
         updateMapInventory()
         hideItems()
+        updateCloudInventoryStats()
     }
     else {
         alert('You dont have Hi-Potions!')
@@ -444,6 +481,7 @@ let megaPotionHealFunc = () => {
         console.log(cloud.health) 
         updateMapInventory()
         hideItems()
+        updateCloudInventoryStats()
     }
     else {
         alert('You dont have Mega Potions!')
@@ -466,7 +504,6 @@ let playerHealth = document.querySelector('.playerHealth')
 // win condition
 const winCondition = (enemy) => {
     if(enemy.health <= 0) {
-        console.log('hi')
         actionsDialogue.innerText = `You defeated the ${enemy.name}! \n You earned ${enemy.bounty} Gil! \n Head back to the Map.`
         mapHealth.innerText = `Health: ${cloud.health}`
         cloud.money += enemy.bounty
