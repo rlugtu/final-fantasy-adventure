@@ -8,6 +8,7 @@ class Enemy {
         this.maxHealth = health;
         this.bounty = bounty;
         this.hasWon = false
+        this.alreadyFighting = false;
     }
     enemyAttack() {
         // return a random number from the range of damages the monster can make
@@ -255,8 +256,13 @@ sixHeadDragonMapIcon.addEventListener('click', () => {
     setTimeout(function() {
         let battleAsk = confirm('Would You like to fight the Six Headed Dragon?' )
         if(battleAsk) {
-            switchToBattle()
-            fight(sixHeadDragon)
+            if(sixHeadDragon.alreadyFighting === false) {
+                switchToBattle()
+                fight(sixHeadDragon)
+            }
+            else {
+                switchToBattle()
+            }
         }
         return
     },1000)
@@ -266,8 +272,13 @@ snakeBladesMapIcon.addEventListener('click', () => {
         if(sixHeadDragon.hasWon) {
             let battleAsk = confirm('Would You like to fight SnakeBlades?' )
             if(battleAsk) {
-                switchToBattle()
-                fight(snakeBlades)
+                if(snakeBlades.alreadyFighting === false) {
+                    switchToBattle()
+                    fight(snakeBlades)
+                }
+                else {
+                    switchToBattle()
+                }
             }
         }
         else {
@@ -281,8 +292,13 @@ skullsMapIcon.addEventListener('click', () => {
         if(snakeBlades.hasWon) {
             let battleAsk = confirm('Would You like to fight Skulls?' )
             if(battleAsk) {
-                switchToBattle()
-                fight(skulls)
+                if(skulls.alreadyFighting === false) {
+                    switchToBattle()
+                    fight(skulls)
+                }
+                else {
+                    switchToBattle()
+                }
             }
         }
         else {
@@ -297,8 +313,13 @@ hornDemonIcon.addEventListener('click', () => {
         if(skulls.hasWon) {
             let battleAsk = confirm('Would You like to fight the Horn Demon?' )
             if(battleAsk) {
-                switchToBattle()
-                fight(hornDemon)
+                if(hornDemon.alreadyFighting === false) {
+                    switchToBattle()
+                    fight(hornDemon)
+                }
+                else {
+                    switchToBattle()
+                }   
             }
         }
         else {
@@ -312,8 +333,13 @@ cactuarIcon.addEventListener('click', () => {
         if(hornDemon.hasWon) {
             let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
             if(battleAsk) {
-            switchToBattle()
-            fight(cactuar)
+                if(cactuar.alreadyFighting === false) {
+                    switchToBattle()
+                    fight(cactuar)
+                }
+                else {
+                    switchToBattle()
+                }
             }
         }
         else {
@@ -601,7 +627,10 @@ const steal = (enemy) => {
         battleMoney.innerText = `Gil: ${cloud.money}`
         
         // ENEMY TURN
-        enemyTurn(enemy)
+        if(enemy.hasWon === false) {
+            enemyTurn(enemy)
+            loseCondition(cloud)
+        }
         return
     })
     return
@@ -623,12 +652,15 @@ const run = (enemy) => {
         // ACTUAL enemy attack 
         setTimeout(enemyMoveAttackAnimation,1000)
         setTimeout(enemyAttackAnimation,1500)
-        setTimeout(function() {
+        if(enemy.hasWon === false) {
             let damageTaken = enemy.enemyAttack()
-            actionsDialogue.innerText = `You took ${damageTaken} damage!`
-            cloud.health -= damageTaken
-            playerHealth.innerText = `Health: ${cloud.health}`
-        },500)
+            setTimeout(function() {
+                actionsDialogue.innerText = `You took ${damageTaken} damage!`
+                cloud.health -= damageTaken
+                playerHealth.innerText = `Health: ${cloud.health}`
+                loseCondition(cloud)
+            },1000)
+        }
         return 
     })
     return 
@@ -665,6 +697,7 @@ let enemyMoveAttackAnimation = () => {
 }
 // enemy attack Function
 const enemyTurn = (enemy) => {
+    let damageTaken = enemy.enemyAttack()
         // HIDE PLAYER OPTIONS
         setTimeout(function() {
             allOptions.classList.add('off')
@@ -683,11 +716,11 @@ const enemyTurn = (enemy) => {
         setTimeout(enemyAttackAnimation,5000)
         // ACTUAL enemy attack 
         setTimeout(function() {
-            let damageTaken = enemy.enemyAttack()
             actionsDialogue.innerText = `You took ${damageTaken} damage!`
             cloud.health -= damageTaken
             playerHealth.innerText = `Health: ${cloud.health}`
         },5500)
+        console.log(damageTaken)
         loseCondition(cloud)
     return 
 }
@@ -701,16 +734,21 @@ let currentPlayer = 'cloud'
 
 //FIGHT FUNCTION
 const fight = (enemy) => {
-    // reset enemy health everytime new fight is initiated 
-    actionsDialogue.innerText = ''
-     // change the Enemy Icon based on Monster
-    enemyIcon.style.backgroundImage = `url('${enemy.url}')`
-    enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
-    // Clouds current health
-    playerHealth.innerText = `Health: ${cloud.health}`
-    //activate Event Listeners
-   playerTurn(enemy)
-   
+    if(enemy.hasWon === false && enemy.alreadyFighting === false) {
+        enemy.alreadyFighting = true
+         // reset enemy health everytime new fight is initiated 
+        actionsDialogue.innerText = ''
+        // change the Enemy Icon based on Monster
+        enemyIcon.style.backgroundImage = `url('${enemy.url}')`
+        enemyInfo.innerText = `${enemy.name} \n Health: ${enemy.health}`
+        // Clouds current health
+        playerHealth.innerText = `Health: ${cloud.health}`
+        //activate Event Listeners
+        playerTurn(enemy)
+    }
+    else {
+        return
+    }
 }
 
 let testDelete = () => {
