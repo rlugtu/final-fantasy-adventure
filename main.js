@@ -52,11 +52,17 @@ const cloud = {
 
 // SOUNDS
 let mainMenuSound = new Audio('./sounds/mainMenuSound.mp3')
+mainMenuSound.volume = 0.4;
 let battleMusic = new Audio('./sounds/battleMusic.mp3')
+battleMusic.volume = 0.4;
 let winSound = new Audio('./sounds/battleWin.mp3')
+winSound.volume = 0.8;
 let buttonSound = new Audio('./sounds/buttonSound.mp3')
+buttonSound.volume = 0.8;
 let shopMusic = new Audio('./sounds/shopMusic.mp3')
+shopMusic.volume = 0.4;
 let mapMusic = new Audio('./sounds/mapMusic.mp3')
+mapMusic.volume = 0.4;
 let enemyDamageSound = new Audio('./sounds/enemyDamageSound.mp3')
 let healSound = new Audio('./sounds/healSound.mp3')
 let cloudAttackSound = new Audio('./sounds/cloudAttackSound.mp3')
