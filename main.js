@@ -438,6 +438,9 @@ let potionHealFunc = () => {
         console.log(cloud.health)
         healAnimation()
         cloud.health += potionHeals.potion
+        if(cloud.health > 100) {
+            cloud.health = 100
+        }
         actionsDialogue.innerText = `You Healed ${potionHeals.potion} HP!`   
         playerHealth.innerText = `Health: ${cloud.health}`    
         console.log(cloud.health) 
@@ -456,6 +459,9 @@ let hiPotionHealFunc = () => {
         console.log(cloud.health)
         healAnimation()
         cloud.health += potionHeals.hiPotion
+        if(cloud.health > 100) {
+            cloud.health = 100
+        }
         actionsDialogue.innerText = `You Healed ${potionHeals.hiPotion} HP!`
         playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.hiPotion--
@@ -474,6 +480,9 @@ let megaPotionHealFunc = () => {
         console.log(cloud.health)
         healAnimation()
         cloud.health += potionHeals.megaPotion
+        if(cloud.health > 100) {
+            cloud.health = 100
+        }
         actionsDialogue.innerText = `You Healed ${potionHeals.megaPotion} HP!`
         playerHealth.innerText = `Health: ${cloud.health}`            
         cloud.megaPotion--

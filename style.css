@@ -217,6 +217,19 @@ body {
     font-weight: bold;
     font-size: 18px;
 }
+
+#battleMoney {
+    position: absolute;
+    margin-top: 480px;
+    margin-left: 330px;
+    font-weight: bold;
+    width: 100px;
+    height: auto;
+    padding: 5px;
+    background-color:  rgba(139, 127, 109, 0.8);
+    border: 3px solid black;  
+}
+
 .dialogueBox{
     position: absolute;
     margin-top: 20px;
@@ -302,12 +315,6 @@ body {
     border: 3px solid black;
     background-color:  rgba(139, 127, 109, 0.8);
     padding: 20px;
-}
-#battleMoney {
-    position: absolute;
-    margin-top: -60px;
-    margin-left: 10px;
-    font-weight: bold;
 }
 
 #attack {
