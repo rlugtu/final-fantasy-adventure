@@ -425,14 +425,14 @@ const updateMapHealth = () => {
 let mapPotion = document.querySelector('.mapPotion')
 let mapHiPotion = document.querySelector('.mapHiPotion')
 let mapMegaPotion = document.querySelector('.mapMegaPotion')
-// UPDATE POTIONS 
+// UPDATE POTIONS AMOUNT
 const updateMapInventory = () => {
     mapPotion.innerText = cloud.potion + ' ' + 'Potion'
     mapHiPotion.innerText = cloud.hiPotion + ' ' + 'Hi-Potion'
     mapMegaPotion.innerText = cloud.megaPotion + ' ' + 'MegaPotion'
 }
 
-// USING POTIONS IN MAP 
+// USING POTIONS IN INVENTORY 
 let potionHealFunc = () => {
     if(cloud.potion > 0) {
         console.log(cloud.health)
