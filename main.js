@@ -752,7 +752,7 @@ const enemyTurn = (enemy) => {
         // HIDE PLAYER OPTIONS
         setTimeout(function() {
             allOptions.classList.add('off')
-        },500)
+        },300)
         setTimeout(function() {
             allOptions.classList.remove('off')
         },6000)
