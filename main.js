@@ -536,19 +536,6 @@ const loseCondition = (player) => {
     return
 }
 
-// CHANGE PLAYER
-let switchPlayer = (player) => {
-    if(player === 'cloud') {
-        currentPlayer = 'enemy'
-    }
-    else {
-        currentPlayer ='cloud'
-    }
-    console.log(currentPlayer)
-    return
-}
-
-
 
 // CLOUD ATTACK ANIMATION 
 // SLASH ANIMATION
@@ -599,7 +586,6 @@ const attack = (enemy) => {
     })
     return
 }
-
 
 
 // item button
@@ -771,16 +757,12 @@ const enemyTurn = (enemy) => {
             cloud.health -= damageTaken
             playerHealth.innerText = `Health: ${cloud.health}`
         },5500)
-        console.log(damageTaken)
+        console.log('enemy damage: ' + damageTaken)
         loseCondition(cloud)
     return 
 }
 
 let enemyIcon = document.querySelector('.enemy-icon')
-
-
-
-let currentPlayer = 'cloud'
 
 
 //FIGHT FUNCTION
