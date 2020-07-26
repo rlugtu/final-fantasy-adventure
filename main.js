@@ -373,7 +373,7 @@ hornDemonIcon.addEventListener('click', () => {
 cactuarIcon.addEventListener('click', () => {
     setTimeout(function() {
         if(hornDemon.hasWon) {
-            let battleAsk = confirm('Are you sure you want to fight Cactuar the final Boss???' )
+            let battleAsk = confirm('Are you sure you want to fight Cactuar the Final Boss???' )
             if(battleAsk) {
                 if(cactuar.alreadyFighting === false) {
                     switchToBattle()
