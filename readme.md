@@ -8,6 +8,10 @@
 
 ## Technologies Used 
     - HTML, CSS, Vanilla Javascript
+    - Aesthetically the game relies heavily on DOM Manipulation to trigger different screens, battles, menus, and animations. The game relies on event listeners to trigger screens off while some are on.
+    - Sound wise there is also sounds that play when certain screens are triggers, animations are fired, and buttons are hovered.
+    - Under the hood each enemy is derived from a Class Object allowing each enemy to have unique stats but the same attack functions
+    - the players stats is an object on its own that is altered based on the state of the battle or items being used.
 
 ## Approach 
     - There are 4 screens that the player can access, start menu, map, shop, and battle screens
