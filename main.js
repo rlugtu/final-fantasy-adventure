@@ -592,9 +592,9 @@ const attack = (enemy) => {
 const itemOption = document.querySelector('#item')
 let allOptions = document.querySelector('.player-options')
 const showItems = () => {
-    let inventory = document.querySelector('.inventory')
+    let inventoryBattle = document.querySelector('.inventory')
         allOptions.classList.add('off')
-        inventory.classList.remove('off')
+        inventoryBattle.classList.remove('off')
 }
 const hideItems = () => {
     let inventory = document.querySelector('.inventory')
