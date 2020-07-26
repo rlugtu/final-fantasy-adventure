@@ -121,6 +121,7 @@ const switchToMap = () => {
     battleScreen.classList.add('inactive')
     shopScreen.classList.add('inactive')
     inventoryScreen.classList.add('inactive')
+    inventoryToggle.classList.remove('off')
     updateMapInventory()
     updateMapHealth()
     return
@@ -137,8 +138,7 @@ const switchToBattle = () => {
     battleScreen.classList.remove('inactive')
     shopScreen.classList.add('inactive')
     inventoryScreen.classList.add('inactive')
-
-    
+    inventoryToggle.classList.add('off')
     return
 }
 
