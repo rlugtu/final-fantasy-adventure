@@ -275,6 +275,10 @@ const updateShopMoney = () => {
 
 // MAP EVENT LISTENERS
 // MOVING CHARACTER
+/*  assisted with resources from https://www.kirupa.com/snippets/move_element_to_click_position.htm 
+code did not work on its own, implemented getBoundingClient to take div offset into account
+// https://www.w3schools.com/jsref/met_element_getboundingclientrect.asp
+*/
 const playerIconMap = document.querySelector('.player-icon-map')
 let targetPosition = (e) => {
     let xPosition = e.clientX - mapScreen.getBoundingClientRect().left
